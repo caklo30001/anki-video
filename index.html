@@ -7,31 +7,68 @@
 <title>Reproductor Anki</title>
 <style>
   html, body { margin: 0; height: 100%; background: #000; }
-  .box { position: relative; width: 100%; height: 100%; }
-  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  #player, iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   p { color: #ccc; font: 16px sans-serif; text-align: center; padding: 2em 1em; margin: 0; }
 </style>
 </head>
 <body>
-<div class="box" id="box"></div>
+<div id="player"></div>
 <script>
   // Uso: index.html?v=ID_DEL_VIDEO&start=SEGUNDOS&end=SEGUNDOS
   var q = new URLSearchParams(location.search);
   var v = (q.get("v") || "").replace(/[^A-Za-z0-9_-]/g, "");
   var start = parseInt(q.get("start"), 10);
   var end = parseInt(q.get("end"), 10);
-  var box = document.getElementById("box");
+  if (isNaN(start)) start = 0;
+  if (isNaN(end)) end = undefined;
+  var player, timer;
+
+  function clip() {
+    var c = { videoId: v, startSeconds: start };
+    if (end !== undefined) c.endSeconds = end;
+    return c;
+  }
+
+  // Deja el video listo otra vez al inicio del fragmento
+  function reset() {
+    clearInterval(timer);
+    player.cueVideoById(clip());
+  }
+
+  function onStateChange(e) {
+    if (e.data === YT.PlayerState.ENDED) {
+      reset();
+    } else if (e.data === YT.PlayerState.PLAYING) {
+      // Si alguien adelanta fuera del rango, lo vuelve a encuadrar
+      var t = player.getCurrentTime();
+      if (t < start - 1) player.seekTo(start, true);
+      clearInterval(timer);
+      if (end !== undefined) {
+        timer = setInterval(function () {
+          if (player.getCurrentTime() >= end) { player.pauseVideo(); reset(); }
+        }, 200);
+      }
+    } else {
+      clearInterval(timer);
+    }
+  }
+
+  function onYouTubeIframeAPIReady() {
+    var vars = { start: start, rel: 0, playsinline: 1, origin: location.origin };
+    if (end !== undefined) vars.end = end;
+    player = new YT.Player("player", {
+      videoId: v,
+      playerVars: vars,
+      events: { onStateChange: onStateChange }
+    });
+  }
+
   if (!v) {
-    box.innerHTML = "<p>Falta el ID del video (?v=...)</p>";
+    document.getElementById("player").innerHTML = "<p>Falta el ID del video (?v=...)</p>";
   } else {
-    var params = new URLSearchParams({ rel: "0", playsinline: "1" });
-    if (!isNaN(start)) params.set("start", start);
-    if (!isNaN(end)) params.set("end", end);
-    var f = document.createElement("iframe");
-    f.src = "https://www.youtube.com/embed/" + v + "?" + params.toString();
-    f.allow = "autoplay; encrypted-media; picture-in-picture";
-    f.allowFullscreen = true;
-    box.appendChild(f);
+    var s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(s);
   }
 </script>
 </body>
