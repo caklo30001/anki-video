@@ -36,7 +36,7 @@
       <button id="back" title="Atrás 1 segundo (←)">−1 s</button>
       <button id="play" title="Reproducir / pausa">▶︎ / ❚❚</button>
       <button id="fwd" title="Adelante 1 segundo (→)">+1 s</button>
-      <button id="slow" title="Velocidad lenta (S)">0.75×</button>
+      <button id="slow" title="Velocidad lenta (S)">0.5×</button>
       <button id="toggleAdj" title="Corregir inicio y fin">Ajustar</button>
     </div>
     <div class="row" id="adj" hidden>
@@ -70,7 +70,7 @@
   function load() {
     try { var o = JSON.parse(localStorage.getItem(KEY) || "null");
       if (o) { start = o.s; end = o.e; } } catch (e) {}
-    try { var r = parseFloat(localStorage.getItem("rate")); if (r === 0.75) rate = r; } catch (e) {}
+    try { var r = parseFloat(localStorage.getItem("rate")); if (r === 0.5) rate = r; } catch (e) {}
   }
   function save() {
     try {
@@ -145,7 +145,7 @@
     else { var t = now(); if (end !== null && t >= end) player.seekTo(start, true); armed = false; player.playVideo(); }
   }
   function toggleSlow() {
-    rate = rate === 1 ? 0.75 : 1;
+    rate = rate === 1 ? 0.5 : 1;
     if (ok()) player.setPlaybackRate(rate);
     try { localStorage.setItem("rate", String(rate)); } catch (e) {}
     show();
