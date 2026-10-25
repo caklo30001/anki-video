@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Reproductor Anki</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; }
+  .box { position: relative; width: 100%; height: 100%; }
+  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  p { color: #ccc; font: 16px sans-serif; text-align: center; padding: 2em 1em; margin: 0; }
+</style>
+</head>
+<body>
+<div class="box" id="box"></div>
+<script>
+  // Uso: index.html?v=ID_DEL_VIDEO&start=SEGUNDOS&end=SEGUNDOS
+  var q = new URLSearchParams(location.search);
+  var v = (q.get("v") || "").replace(/[^A-Za-z0-9_-]/g, "");
+  var start = parseInt(q.get("start"), 10);
+  var end = parseInt(q.get("end"), 10);
+  var box = document.getElementById("box");
+  if (!v) {
+    box.innerHTML = "<p>Falta el ID del video (?v=...)</p>";
+  } else {
+    var params = new URLSearchParams({ rel: "0", playsinline: "1" });
+    if (!isNaN(start)) params.set("start", start);
+    if (!isNaN(end)) params.set("end", end);
+    var f = document.createElement("iframe");
+    f.src = "https://www.youtube.com/embed/" + v + "?" + params.toString();
+    f.allow = "autoplay; encrypted-media; picture-in-picture";
+    f.allowFullscreen = true;
+    box.appendChild(f);
+  }
+</script>
+</body>
+</html>
