@@ -15,50 +15,48 @@
 <div id="player"></div>
 <script>
   // Uso: index.html?v=ID_DEL_VIDEO&start=SEGUNDOS&end=SEGUNDOS
+  // La página corta el fragmento ella misma: al llegar a "end" pausa y vuelve a "start".
   var q = new URLSearchParams(location.search);
   var v = (q.get("v") || "").replace(/[^A-Za-z0-9_-]/g, "");
-  var start = parseInt(q.get("start"), 10);
-  var end = parseInt(q.get("end"), 10);
+  var start = parseFloat(q.get("start"));
+  var end = parseFloat(q.get("end"));
   if (isNaN(start)) start = 0;
-  if (isNaN(end)) end = undefined;
+  if (isNaN(end) || end <= start) end = null;
   var player, timer;
 
-  function clip() {
-    var c = { videoId: v, startSeconds: start };
-    if (end !== undefined) c.endSeconds = end;
-    return c;
+  function backToStart() {
+    player.pauseVideo();
+    player.seekTo(start, true);
+    player.pauseVideo();
   }
 
-  // Deja el video listo otra vez al inicio del fragmento
-  function reset() {
+  function watch() {
     clearInterval(timer);
-    player.cueVideoById(clip());
+    timer = setInterval(function () {
+      var t = player.getCurrentTime();
+      if (end !== null && t >= end) { clearInterval(timer); backToStart(); }
+    }, 100);
   }
 
   function onStateChange(e) {
-    if (e.data === YT.PlayerState.ENDED) {
-      reset();
-    } else if (e.data === YT.PlayerState.PLAYING) {
-      // Si alguien adelanta fuera del rango, lo vuelve a encuadrar
+    if (e.data === YT.PlayerState.PLAYING) {
       var t = player.getCurrentTime();
-      if (t < start - 1) player.seekTo(start, true);
+      // Si arranca fuera del fragmento (por ejemplo desde 0), lo encuadra
+      if (t < start - 0.5 || (end !== null && t >= end)) player.seekTo(start, true);
+      watch();
+    } else if (e.data === YT.PlayerState.ENDED) {
       clearInterval(timer);
-      if (end !== undefined) {
-        timer = setInterval(function () {
-          if (player.getCurrentTime() >= end) { player.pauseVideo(); reset(); }
-        }, 200);
-      }
+      backToStart();
     } else {
       clearInterval(timer);
     }
   }
 
   function onYouTubeIframeAPIReady() {
-    var vars = { start: start, rel: 0, playsinline: 1, origin: location.origin };
-    if (end !== undefined) vars.end = end;
     player = new YT.Player("player", {
       videoId: v,
-      playerVars: vars,
+      // Sin "end": así YouTube nunca da el video por terminado y no lo reinicia a 0
+      playerVars: { start: Math.floor(start), rel: 0, playsinline: 1, origin: location.origin },
       events: { onStateChange: onStateChange }
     });
   }
