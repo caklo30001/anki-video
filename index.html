@@ -37,6 +37,7 @@
       <button id="play" title="Reproducir / pausa">▶︎ / ❚❚</button>
       <button id="fwd" title="Adelante 1 segundo (→)">+1 s</button>
       <button id="slow" title="Velocidad lenta (S)">0.5×</button>
+      <button id="loop" title="Repetir en bucle (B)">∞ Bucle</button>
       <button id="toggleAdj" title="Corregir inicio y fin">Ajustar</button>
     </div>
     <div class="row" id="adj" hidden>
@@ -56,13 +57,13 @@
   </div>
 </div>
 <script>
-  // Uso: index.html?v=ID&start=SEG&end=SEG&autoplay=1
+  // Uso: index.html?v=ID&start=SEG&end=SEG&autoplay=1 (bucle activado por defecto; &loop=0 lo apaga)
   var q = new URLSearchParams(location.search);
   var v = (q.get("v") || "").replace(/[^A-Za-z0-9_-]/g, "");
   var origStart = parseFloat(q.get("start")); if (isNaN(origStart)) origStart = 0;
   var origEnd = parseFloat(q.get("end")); if (isNaN(origEnd) || origEnd <= origStart) origEnd = null;
   var start = origStart, end = origEnd;
-  var player, timer, armed = true, rate = 1;
+  var player, timer, armed = true, rate = 1, loop = q.get("loop") !== "0", pauseT;
   var $ = function (id) { return document.getElementById(id); };
 
   // ---- Ajustes guardados en este dispositivo ----
@@ -71,6 +72,7 @@
     try { var o = JSON.parse(localStorage.getItem(KEY) || "null");
       if (o) { start = o.s; end = o.e; } } catch (e) {}
     try { var r = parseFloat(localStorage.getItem("rate")); if (r === 0.5) rate = r; } catch (e) {}
+    try { var l = localStorage.getItem("loop"); if (l !== null && q.get("loop") === null) loop = l === "1"; } catch (e) {}
   }
   function save() {
     try {
@@ -91,6 +93,7 @@
     $("eOut").textContent = fmt(end);
     $("copyTxt").value = "startSeconds " + r1(start) + "  endSeconds " + (end === null ? "" : r1(end));
     $("slow").classList.toggle("on", rate !== 1);
+    $("loop").classList.toggle("on", loop);
   }
 
   // ---- Reproductor ----
@@ -98,6 +101,13 @@
   function now() { return ok() ? player.getCurrentTime() : start; }
 
   function backToStart() {
+    clearTimeout(pauseT);
+    if (loop) {
+      // Bucle: vuelve al inicio, pausa breve y sigue reproduciendo
+      player.pauseVideo(); player.seekTo(start, true);
+      pauseT = setTimeout(function () { if (loop) { armed = false; player.playVideo(); } }, 700);
+      return;
+    }
     player.pauseVideo(); player.seekTo(start, true); player.pauseVideo(); armed = true;
   }
   function watch() {
@@ -132,7 +142,7 @@
   }
 
   // ---- Controles ----
-  function repeat() { if (!ok()) return; armed = false; player.seekTo(start, true); player.playVideo(); }
+  function repeat() { if (!ok()) return; clearTimeout(pauseT); armed = false; player.seekTo(start, true); player.playVideo(); }
   function jump(d) {
     if (!ok()) return;
     var t = Math.max(0, now() + d);
@@ -143,6 +153,13 @@
     if (!ok()) return;
     if (player.getPlayerState() === YT.PlayerState.PLAYING) player.pauseVideo();
     else { var t = now(); if (end !== null && t >= end) player.seekTo(start, true); armed = false; player.playVideo(); }
+  }
+  function toggleLoop() {
+    loop = !loop;
+    if (!loop) clearTimeout(pauseT);
+    try { localStorage.setItem("loop", loop ? "1" : "0"); } catch (e) {}
+    msg(loop ? "Bucle activado" : "Bucle desactivado");
+    show();
   }
   function toggleSlow() {
     rate = rate === 1 ? 0.5 : 1;
@@ -166,6 +183,7 @@
   $("fwd").onclick = function () { jump(1); };
   $("play").onclick = togglePlay;
   $("slow").onclick = toggleSlow;
+  $("loop").onclick = toggleLoop;
   $("toggleAdj").onclick = function () {
     var h = !$("adj").hidden;
     $("adj").hidden = h; $("adj2").hidden = h;
@@ -195,6 +213,7 @@
     else if (e.key === "ArrowRight") { jump(1); e.preventDefault(); }
     else if (e.key === "r" || e.key === "R") repeat();
     else if (e.key === "s" || e.key === "S") toggleSlow();
+    else if (e.key === "b" || e.key === "B") toggleLoop();
   });
 
   load(); show();
