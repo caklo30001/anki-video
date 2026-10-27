@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertidor Youtube2Anki</title>
+<style>
+  :root { --bg:#f2f3f5; --card:#fff; --fg:#1d2330; --muted:#5b6476; --line:#d7dbe3; --accent:#c8463d; --ok:#2f7d4f; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16181d; --card:#20232a; --fg:#e7e9ee; --muted:#9aa2b2; --line:#343844; --accent:#ef6b61; --ok:#6cc48f; color-scheme: dark; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:640px; margin:0 auto; padding:24px max(16px, env(safe-area-inset-left,0px)); display:flex; flex-direction:column; gap:16px; }
+  h1 { font-size:1.4rem; margin:0; }
+  p { margin:0; color:var(--muted); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; display:flex; flex-direction:column; gap:12px; }
+  label { font-weight:600; font-size:.9rem; }
+  input[type=text] { width:100%; box-sizing:border-box; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--fg); font:inherit; }
+  #drop { border:2px dashed var(--line); border-radius:10px; padding:28px 16px; text-align:center; color:var(--muted); cursor:pointer; }
+  #drop.over { border-color:var(--accent); color:var(--fg); }
+  .chk { display:flex; gap:8px; align-items:center; font-weight:400; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:10px 14px; font:inherit; font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.45; cursor:default; }
+  button:focus-visible, #drop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  #status { font-size:.9rem; }
+  #status.ok { color:var(--ok); }
+  #status.err { color:var(--accent); }
+  .prev { overflow-x:auto; font-size:.85rem; }
+  .prev table { border-collapse:collapse; width:100%; }
+  .prev td, .prev th { border-bottom:1px solid var(--line); padding:4px 6px; text-align:left; white-space:nowrap; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Convertidor Youtube2Anki</h1>
+  <p>Suelta los CSV que exporta Youtube2Anki y descarga uno listo para importar en Anki con el tipo de nota Youtube2AnkiV2.</p>
+
+  <div class="card">
+    <div id="drop" tabindex="0" role="button">Arrastra aquí tus archivos .csv o toca para elegirlos</div>
+    <input id="file" type="file" accept=".csv,text/csv" multiple hidden>
+    <div>
+      <label for="deck">Mazo (opcional)</label>
+      <input id="deck" type="text" placeholder="Ej.: trucos cinematográficos">
+    </div>
+    <label class="chk"><input id="notes" type="checkbox" checked> Quitar los ♪ de las líneas</label>
+    <button id="go" disabled>Descargar CSV para Anki</button>
+    <div id="status" aria-live="polite"></div>
+  </div>
+
+  <div class="card prev" id="prevBox" hidden>
+    <table><thead><tr><th>Inicio</th><th>Línea</th><th>Seg.</th></tr></thead><tbody id="prev"></tbody></table>
+  </div>
+</main>
+<script>
+  var FIELDS = ["time","nextTime","text","prevText","nextText","id","startSeconds","endSeconds","title","hash"];
+  var rows = [], names = [];
+  var $ = function (id) { return document.getElementById(id); };
+
+  function parseCSV(t) {
+    t = t.replace(/^﻿/, "");
+    var out = [], row = [], f = "", q = false;
+    for (var i = 0; i < t.length; i++) {
+      var c = t[i];
+      if (q) {
+        if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; }
+        else f += c;
+      } else if (c === '"') q = true;
+      else if (c === ",") { row.push(f); f = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && t[i + 1] === "\n") i++;
+        row.push(f); f = "";
+        if (row.length > 1 || row[0] !== "") out.push(row);
+        row = [];
+      } else f += c;
+    }
+    if (f !== "" || row.length) { row.push(f); out.push(row); }
+    return out;
+  }
+  function clean(s) { return s.replace(/\s*♪[\s♪]*/g, " ").trim(); }
+  function esc(s) { return '"' + String(s).replace(/"/g, '""') + '"'; }
+  function html(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+
+  function status(t, cls) { $("status").textContent = t; $("status").className = cls || ""; }
+
+  function load(files) {
+    rows = []; names = [];
+    var list = Array.prototype.slice.call(files).filter(function (f) { return /\.csv$/i.test(f.name) || f.type === "text/csv"; });
+    if (!list.length) { status("Elige archivos .csv exportados desde Youtube2Anki.", "err"); return; }
+    var pending = list.length, bad = 0;
+    list.forEach(function (f) {
+      var r = new FileReader();
+      r.onload = function () {
+        var got = parseCSV(r.result).filter(function (x) { return x.length === 10 && x[0].charAt(0) !== "#"; });
+        if (!got.length) bad++;
+        rows = rows.concat(got); names.push(f.name);
+        if (--pending === 0) done(bad);
+      };
+      r.onerror = function () { bad++; if (--pending === 0) done(bad); };
+      r.readAsText(f, "utf-8");
+    });
+  }
+  function done(bad) {
+    var seen = {};
+    rows = rows.filter(function (r) { if (seen[r[9]]) return false; seen[r[9]] = 1; return true; });
+    $("go").disabled = !rows.length;
+    if (!rows.length) { status("No encontré tarjetas. ¿Son CSV de Youtube2Anki (10 columnas)?", "err"); $("prevBox").hidden = true; return; }
+    status(rows.length + " tarjetas listas de " + names.length + " archivo(s)" + (bad ? " · " + bad + " archivo(s) sin tarjetas válidas" : "") + ".", "ok");
+    $("prev").innerHTML = rows.slice(0, 8).map(function (r) {
+      var t = $("notes").checked ? clean(r[2]) : r[2];
+      return "<tr><td>" + html(r[0]) + "</td><td>" + html(t) + "</td><td>" + html(r[6]) + "–" + html(r[7]) + "</td></tr>";
+    }).join("") + (rows.length > 8 ? '<tr><td colspan="3">… y ' + (rows.length - 8) + " más</td></tr>" : "");
+    $("prevBox").hidden = false;
+  }
+
+  function build() {
+    var strip = $("notes").checked, deck = $("deck").value.trim();
+    var head = ["#separator:comma", "#html:true", "#notetype:Youtube2AnkiV2"];
+    if (deck) head.push("#deck:" + deck);
+    head.push("#columns:" + FIELDS.join(","));
+    var body = rows.map(function (r) {
+      var c = r.slice();
+      if (strip) { c[2] = clean(c[2]); c[3] = clean(c[3]); c[4] = clean(c[4]); }
+      return c.map(esc).join(",");
+    });
+    return head.join("\n") + "\n" + body.join("\n") + "\n";
+  }
+
+  $("go").onclick = function () {
+    var blob = new Blob([build()], { type: "text/csv;charset=utf-8" });
+    var a = document.createElement("a");
+    var base = names.length === 1 ? names[0].replace(/\.csv$/i, "") : "youtube2anki_" + rows.length + "_tarjetas";
+    a.href = URL.createObjectURL(blob); a.download = base + "_anki.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    status("Descargado: " + a.download, "ok");
+  };
+  $("notes").onchange = function () { if (rows.length) done(0); };
+  $("drop").onclick = function () { $("file").click(); };
+  $("drop").onkeydown = function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("file").click(); } };
+  $("file").onchange = function () { load(this.files); this.value = ""; };
+  ["dragenter", "dragover"].forEach(function (ev) { $("drop").addEventListener(ev, function (e) { e.preventDefault(); $("drop").classList.add("over"); }); });
+  ["dragleave", "drop"].forEach(function (ev) { $("drop").addEventListener(ev, function (e) { e.preventDefault(); $("drop").classList.remove("over"); }); });
+  $("drop").addEventListener("drop", function (e) { load(e.dataTransfer.files); });
+</script>
+</body>
+</html>
