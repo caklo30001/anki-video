@@ -17,6 +17,7 @@
   #drop { border:2px dashed var(--line); border-radius:10px; padding:28px 16px; text-align:center; color:var(--muted); cursor:pointer; }
   #drop.over { border-color:var(--accent); color:var(--fg); }
   .chk { display:flex; gap:8px; align-items:center; font-weight:400; }
+  .hint { font-size:.82rem; color:var(--muted); margin-top:-6px; }
   button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:10px 14px; font:inherit; font-weight:600; cursor:pointer; }
   button:disabled { opacity:.45; cursor:default; }
   button:focus-visible, #drop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
@@ -32,32 +33,39 @@
 <body>
 <main>
   <h1>Convertidor Youtube2Anki</h1>
-  <p>Suelta los CSV que exporta Youtube2Anki y descarga uno listo para importar en Anki con el tipo de nota Youtube2AnkiV2.</p>
+  <p>Suelta los CSV que exporta Youtube2Anki y descarga uno listo para importar en Anki. Si tienes un archivo de datos extra (hash, contexto, gramática), suéltalo junto con el CSV y se combinan solos.</p>
 
   <div class="card">
     <div id="drop" tabindex="0" role="button">Arrastra aquí tus archivos .csv o toca para elegirlos</div>
     <input id="file" type="file" accept=".csv,text/csv" multiple hidden>
     <div>
-      <label for="deck">Mazo (opcional)</label>
-      <input id="deck" type="text" placeholder="Ej.: trucos cinematográficos">
+      <label for="ntype">Tipo de nota</label>
+      <input id="ntype" type="text" value="Youtube2Anki Dictado">
     </div>
+    <div>
+      <label for="deck">Mazo (opcional)</label>
+      <input id="deck" type="text" placeholder="Ej.: canciones">
+    </div>
+    <label class="chk"><input id="split" type="checkbox" checked> Dividir cada tarjeta en sus líneas (♪ … ♪)</label>
+    <div class="hint">Reparte el audio entre las líneas según la cantidad de palabras. Los tiempos son aproximados.</div>
+    <label class="chk"><input id="dedupe" type="checkbox" checked> Quitar líneas repetidas (coros)</label>
     <label class="chk"><input id="notes" type="checkbox" checked> Quitar los ♪ de las líneas</label>
     <button id="go" disabled>Descargar CSV para Anki</button>
     <div id="status" aria-live="polite"></div>
   </div>
 
   <div class="card prev" id="prevBox" hidden>
-    <table><thead><tr><th>Inicio</th><th>Línea</th><th>Seg.</th></tr></thead><tbody id="prev"></tbody></table>
+    <table><thead><tr><th>Inicio</th><th>Línea</th><th>Seg.</th><th>Extra</th></tr></thead><tbody id="prev"></tbody></table>
   </div>
 </main>
 <script>
   var FIELDS = ["time","nextTime","text","prevText","nextText","id","startSeconds","endSeconds","title","hash"];
-  var rows = [], names = [];
+  var rows = [], extra = {}, names = [], out = [];
   var $ = function (id) { return document.getElementById(id); };
 
   function parseCSV(t) {
     t = t.replace(/^﻿/, "");
-    var out = [], row = [], f = "", q = false;
+    var res = [], row = [], f = "", q = false;
     for (var i = 0; i < t.length; i++) {
       var c = t[i];
       if (q) {
@@ -68,57 +76,109 @@
       else if (c === "\n" || c === "\r") {
         if (c === "\r" && t[i + 1] === "\n") i++;
         row.push(f); f = "";
-        if (row.length > 1 || row[0] !== "") out.push(row);
+        if (row.length > 1 || row[0] !== "") res.push(row);
         row = [];
       } else f += c;
     }
-    if (f !== "" || row.length) { row.push(f); out.push(row); }
-    return out;
+    if (f !== "" || row.length) { row.push(f); res.push(row); }
+    return res;
   }
-  function clean(s) { return s.replace(/\s*♪[\s♪]*/g, " ").trim(); }
+  function clean(s) { return String(s).replace(/\s*♪[\s♪]*/g, " ").trim(); }
+  function nullish(s) { return s === "null" ? "" : s; }
   function esc(s) { return '"' + String(s).replace(/"/g, '""') + '"'; }
   function html(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
-
+  function words(s) { return clean(s).split(/\s+/).filter(Boolean).length || 1; }
+  function key(s) { return clean(s).toLowerCase().replace(/[’‘´`]/g, "'").replace(/[^\p{L}\p{N}' ]/gu, "").replace(/\s+/g, " ").trim(); }
+  function half(x) { var r = Math.round(x * 2) / 2; return String(r); }
   function status(t, cls) { $("status").textContent = t; $("status").className = cls || ""; }
 
+  // Divide el texto en líneas de subtítulo: "♪ A ♪ ♪ B ♪" -> ["A", "B"]
+  function segments(text) {
+    if (!/♪/.test(text)) return [String(text).trim()].filter(Boolean);
+    return String(text).split("♪").map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function process() {
+    var doSplit = $("split").checked, doDedupe = $("dedupe").checked;
+    var seen = {}, list = [];
+    rows.forEach(function (r) {
+      var segs = doSplit ? segments(r[2]) : [r[2]];
+      if (!segs.length) return;
+      var s = parseFloat(r[6]), e = parseFloat(r[7]);
+      var hasTimes = !isNaN(s) && !isNaN(e) && e > s && segs.length > 1;
+      var total = segs.reduce(function (a, x) { return a + words(x); }, 0), acc = 0;
+      segs.forEach(function (seg, i) {
+        var w = words(seg), c = r.slice();
+        c[2] = segs.length > 1 ? "♪ " + seg + " ♪" : r[2];
+        c[9] = segs.length > 1 ? r[9] + "-" + (i + 1) : r[9];
+        if (hasTimes) {
+          if (i > 0) c[6] = half(s + (e - s) * acc / total);
+          if (i < segs.length - 1) c[7] = half(s + (e - s) * (acc + w) / total);
+        }
+        acc += w;
+        var k = key(seg);
+        if (doDedupe && k && seen[k]) return;
+        seen[k] = 1;
+        list.push(c);
+      });
+    });
+    if (doSplit) {
+      list.forEach(function (c, i) {
+        c[3] = i > 0 && list[i - 1][5] === c[5] ? list[i - 1][2] : "";
+        c[4] = i < list.length - 1 && list[i + 1][5] === c[5] ? list[i + 1][2] : "";
+      });
+    }
+    return list;
+  }
+
   function load(files) {
-    rows = []; names = [];
+    rows = []; extra = {}; names = [];
     var list = Array.prototype.slice.call(files).filter(function (f) { return /\.csv$/i.test(f.name) || f.type === "text/csv"; });
-    if (!list.length) { status("Elige archivos .csv exportados desde Youtube2Anki.", "err"); return; }
-    var pending = list.length, bad = 0;
+    if (!list.length) { status("Elige archivos .csv.", "err"); return; }
+    var pending = list.length, extraFiles = 0;
     list.forEach(function (f) {
       var r = new FileReader();
       r.onload = function () {
-        var got = parseCSV(r.result).filter(function (x) { return x.length === 10 && x[0].charAt(0) !== "#"; });
-        if (!got.length) bad++;
-        rows = rows.concat(got); names.push(f.name);
-        if (--pending === 0) done(bad);
+        var txt = r.result;
+        if (/^#columns:\s*hash,contexto,gramatica/m.test(txt)) {
+          parseCSV(txt).forEach(function (x) { if (x.length >= 3 && x[0].charAt(0) !== "#") extra[x[0]] = { ctx: x[1], pos: x[2] }; });
+          extraFiles++;
+        } else {
+          rows = rows.concat(parseCSV(txt).filter(function (x) { return x.length >= 10 && x[0].charAt(0) !== "#"; }).map(function (x) { return x.slice(0, 10); }));
+          names.push(f.name);
+        }
+        if (--pending === 0) refresh(extraFiles);
       };
-      r.onerror = function () { bad++; if (--pending === 0) done(bad); };
+      r.onerror = function () { if (--pending === 0) refresh(extraFiles); };
       r.readAsText(f, "utf-8");
     });
   }
-  function done(bad) {
-    var seen = {};
-    rows = rows.filter(function (r) { if (seen[r[9]]) return false; seen[r[9]] = 1; return true; });
-    $("go").disabled = !rows.length;
-    if (!rows.length) { status("No encontré tarjetas. ¿Son CSV de Youtube2Anki (10 columnas)?", "err"); $("prevBox").hidden = true; return; }
-    status(rows.length + " tarjetas listas de " + names.length + " archivo(s)" + (bad ? " · " + bad + " archivo(s) sin tarjetas válidas" : "") + ".", "ok");
-    $("prev").innerHTML = rows.slice(0, 8).map(function (r) {
+  function refresh(extraFiles) {
+    var seenH = {};
+    rows = rows.filter(function (r) { if (seenH[r[9]]) return false; seenH[r[9]] = 1; return true; });
+    out = rows.length ? process() : [];
+    $("go").disabled = !out.length;
+    if (!out.length) { status("No encontré tarjetas. ¿Son CSV de Youtube2Anki (10 columnas)?", "err"); $("prevBox").hidden = true; return; }
+    var withExtra = out.filter(function (c) { return extra[c[9]]; }).length;
+    status(out.length + " tarjetas de " + names.length + " archivo(s)" +
+      (Object.keys(extra).length ? " · datos extra en " + withExtra + " tarjeta(s)" : "") + ".", "ok");
+    $("prev").innerHTML = out.slice(0, 10).map(function (r) {
       var t = $("notes").checked ? clean(r[2]) : r[2];
-      return "<tr><td>" + html(r[0]) + "</td><td>" + html(t) + "</td><td>" + html(r[6]) + "–" + html(r[7]) + "</td></tr>";
-    }).join("") + (rows.length > 8 ? '<tr><td colspan="3">… y ' + (rows.length - 8) + " más</td></tr>" : "");
+      return "<tr><td>" + html(r[0]) + "</td><td>" + html(t) + "</td><td>" + html(r[6]) + "–" + html(r[7]) + "</td><td>" + (extra[r[9]] ? "✓" : "") + "</td></tr>";
+    }).join("") + (out.length > 10 ? '<tr><td colspan="4">… y ' + (out.length - 10) + " más</td></tr>" : "");
     $("prevBox").hidden = false;
   }
 
   function build() {
-    var strip = $("notes").checked, deck = $("deck").value.trim();
-    var head = ["#separator:comma", "#html:true", "#notetype:Youtube2AnkiV2"];
+    var strip = $("notes").checked, deck = $("deck").value.trim(), nt = $("ntype").value.trim() || "Youtube2AnkiV2";
+    var withExtra = Object.keys(extra).length > 0;
+    var head = ["#separator:comma", "#html:true", "#notetype:" + nt];
     if (deck) head.push("#deck:" + deck);
-    head.push("#columns:" + FIELDS.join(","));
-    var body = rows.map(function (r) {
-      var c = r.slice();
+    head.push("#columns:" + FIELDS.join(",") + (withExtra ? ",contexto,gramatica" : ""));
+    var body = out.map(function (r) {
+      var c = r.map(nullish);
       if (strip) { c[2] = clean(c[2]); c[3] = clean(c[3]); c[4] = clean(c[4]); }
+      if (withExtra) { var x = extra[r[9]] || { ctx: "", pos: "" }; c.push(x.ctx, x.pos); }
       return c.map(esc).join(",");
     });
     return head.join("\n") + "\n" + body.join("\n") + "\n";
@@ -127,13 +187,13 @@
   $("go").onclick = function () {
     var blob = new Blob([build()], { type: "text/csv;charset=utf-8" });
     var a = document.createElement("a");
-    var base = names.length === 1 ? names[0].replace(/\.csv$/i, "") : "youtube2anki_" + rows.length + "_tarjetas";
+    var base = names.length === 1 ? names[0].replace(/\.csv$/i, "") : "youtube2anki_" + out.length + "_tarjetas";
     a.href = URL.createObjectURL(blob); a.download = base + "_anki.csv";
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
     status("Descargado: " + a.download, "ok");
   };
-  $("notes").onchange = function () { if (rows.length) done(0); };
+  ["notes", "split", "dedupe"].forEach(function (id) { $(id).onchange = function () { if (rows.length) refresh(0); }; });
   $("drop").onclick = function () { $("file").click(); };
   $("drop").onkeydown = function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("file").click(); } };
   $("file").onchange = function () { load(this.files); this.value = ""; };
