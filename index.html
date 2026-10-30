@@ -24,12 +24,19 @@
     border-radius: 6px; padding: 4px 6px; font: 12px ui-monospace, Consolas, monospace; }
   #msg { color: #8fd18f; min-height: 1em; text-align: center; font-size: 12px; }
   p.err { color: #ccc; font-size: 16px; text-align: center; padding: 2em 1em; margin: 0; }
+  #cover { position: absolute; inset: 0; background: #000; z-index: 5; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px; color: #fff; text-align: center; }
+  #cover b { font-size: 48px; font-variant-numeric: tabular-nums; line-height: 1; }
+  #cover span { font-size: 14px; color: #bbb; }
   [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <div id="wrap">
-  <div id="vid"><div id="player"></div></div>
+  <div id="vid"><div id="player"></div>
+    <div id="cover" hidden><span>🔇 Silenciado mientras pasan los anuncios</span><b id="coverN">10</b>
+      <button type="button" id="coverX">Mostrar ahora</button></div>
+  </div>
   <div id="bar">
     <div class="row">
       <button id="rep" title="Repetir fragmento (R)">⟲ Repetir</button>
@@ -38,7 +45,7 @@
       <button id="fwd" title="Adelante 1 segundo (→)">+1 s</button>
       <button id="slow" title="Velocidad lenta (S)">0.5×</button>
       <button id="loop" title="Repetir en bucle (B)">∞ Bucle</button>
-      <button id="mute" title="Silenciar / activar sonido (M)">🔊 Sonido</button>
+      <button id="mute" title="Silenciar 10 s y tapar los anuncios (M)">🔊 Sonido</button>
       <button id="toggleAdj" title="Corregir inicio y fin">Ajustar</button>
     </div>
     <div class="row" id="adj" hidden>
@@ -135,6 +142,8 @@
   }
   function onYouTubeIframeAPIReady() {
     player = new YT.Player("player", {
+      // Modo de privacidad de YouTube; cambia NOCOOKIE a false para volver al normal
+      host: NOCOOKIE ? "https://www.youtube-nocookie.com" : "https://www.youtube.com",
       videoId: v,
       playerVars: { start: Math.floor(start), rel: 0, playsinline: 1, origin: location.origin,
                     autoplay: q.get("autoplay") === "1" ? 1 : 0 },
@@ -155,9 +164,28 @@
     if (player.getPlayerState() === YT.PlayerState.PLAYING) player.pauseVideo();
     else { var t = now(); if (end !== null && t >= end) player.seekTo(start, true); armed = false; player.playVideo(); }
   }
+  // Silencio + pantalla negra con cuenta regresiva; al terminar vuelve el sonido
+  var COVER_SECS = 10, coverT = null;
+  var NOCOOKIE = q.get("nocookie") !== "0";
   function toggleMute() {
     if (!ok()) return;
-    if (player.isMuted()) player.unMute(); else player.mute();
+    if (player.isMuted()) { endCover(); return; }
+    player.mute();
+    var left = COVER_SECS;
+    $("coverN").textContent = left;
+    $("cover").hidden = false;
+    clearInterval(coverT);
+    coverT = setInterval(function () {
+      left--;
+      $("coverN").textContent = left;
+      if (left <= 0) endCover();
+    }, 1000);
+    setTimeout(showMute, 150);
+  }
+  function endCover() {
+    clearInterval(coverT);
+    $("cover").hidden = true;
+    if (ok()) player.unMute();
     setTimeout(showMute, 150);
   }
   function showMute() {
@@ -196,6 +224,7 @@
   $("slow").onclick = toggleSlow;
   $("loop").onclick = toggleLoop;
   $("mute").onclick = toggleMute;
+  $("coverX").onclick = endCover;
   $("toggleAdj").onclick = function () {
     var h = !$("adj").hidden;
     $("adj").hidden = h; $("adj2").hidden = h;
