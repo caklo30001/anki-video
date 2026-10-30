@@ -165,7 +165,7 @@
     else { var t = now(); if (end !== null && t >= end) player.seekTo(start, true); armed = false; player.playVideo(); }
   }
   // Silencio + pantalla negra con cuenta regresiva; al terminar vuelve el sonido
-  var COVER_SECS = 10, coverT = null;
+  var COVER_SECS = 13, coverT = null;
   var NOCOOKIE = q.get("nocookie") !== "0";
   function toggleMute() {
     if (!ok()) return;
