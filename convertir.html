@@ -27,6 +27,10 @@
   .prev { overflow-x:auto; font-size:.85rem; }
   .prev table { border-collapse:collapse; width:100%; }
   .prev td, .prev th { border-bottom:1px solid var(--line); padding:4px 6px; text-align:left; white-space:nowrap; }
+  .mk { display:flex; gap:8px; align-items:center; }
+  .mk span { font-size:.8rem; color:var(--muted); min-width:3.2em; font-variant-numeric:tabular-nums; }
+  .mk input.bad { border-color:var(--accent); }
+  #mkList { display:flex; flex-direction:column; gap:6px; }
   [hidden] { display:none !important; }
 </style>
 </head>
@@ -50,8 +54,15 @@
     <div class="hint">Reparte el audio entre las líneas según la cantidad de palabras. Los tiempos son aproximados.</div>
     <label class="chk"><input id="dedupe" type="checkbox" checked> Quitar líneas repetidas (coros)</label>
     <label class="chk"><input id="notes" type="checkbox" checked> Quitar los ♪ de las líneas</label>
+    <label class="chk"><input id="bychunk" type="checkbox"> Una tarjeta por chunk (los marcas con /)</label>
     <button id="go" disabled>Descargar CSV para Anki</button>
     <div id="status" aria-live="polite"></div>
+  </div>
+
+  <div class="card" id="mkBox" hidden>
+    <label>Marca los chunks con <b>/</b></label>
+    <p>Escribe una barra donde termina cada chunk, por ejemplo: <i>when you / spot a real bargain</i>. Cada chunk será una tarjeta con su parte del audio (tiempos aproximados para que los afines). No cambies las palabras, solo agrega barras.</p>
+    <div id="mkList"></div>
   </div>
 
   <div class="card prev" id="prevBox" hidden>
@@ -60,7 +71,7 @@
 </main>
 <script>
   var FIELDS = ["time","nextTime","text","prevText","nextText","id","startSeconds","endSeconds","title","hash"];
-  var rows = [], extra = {}, names = [], out = [];
+  var rows = [], extra = {}, names = [], out = [], marks = {};
   var $ = function (id) { return document.getElementById(id); };
 
   function parseCSV(t) {
@@ -167,6 +178,62 @@
       return "<tr><td>" + html(r[0]) + "</td><td>" + html(t) + "</td><td>" + html(r[6]) + "–" + html(r[7]) + "</td><td>" + (extra[r[9]] ? "✓" : "") + "</td></tr>";
     }).join("") + (out.length > 10 ? '<tr><td colspan="4">… y ' + (out.length - 10) + " más</td></tr>" : "");
     $("prevBox").hidden = false;
+    renderMarks();
+  }
+
+  function wordList(s) { return clean(s).replace(/\//g, " ").split(/\s+/).filter(Boolean); }
+  function renderMarks() {
+    var on = $("bychunk").checked && out.length;
+    $("mkBox").hidden = !on;
+    if (!on) return;
+    $("mkList").innerHTML = out.map(function (r, i) {
+      var v = marks[r[9]] != null ? marks[r[9]] : clean(r[2]);
+      return '<div class="mk"><span>' + html(r[0]) + '</span><input type="text" id="mk-' + i + '" data-h="' + html(r[9]) +
+        '" value="' + html(v).replace(/"/g, "&quot;") + '" aria-label="Chunks de la línea ' + (i + 1) + '"></div>';
+    }).join("");
+    Array.prototype.forEach.call($("mkList").querySelectorAll("input"), function (inp, i) {
+      inp.oninput = function () {
+        marks[inp.getAttribute("data-h")] = inp.value;
+        var same = wordList(inp.value).join(" ").toLowerCase() === wordList(out[i][2]).join(" ").toLowerCase();
+        inp.classList.toggle("bad", !same);
+        countChunks();
+      };
+    });
+    countChunks();
+  }
+  function pieces(r) {
+    var v = marks[r[9]] != null ? marks[r[9]] : clean(r[2]);
+    return v.split("/").map(function (x) { return x.replace(/\s+/g, " ").trim(); }).filter(Boolean);
+  }
+  function countChunks() {
+    if (!$("bychunk").checked) return;
+    var n = out.reduce(function (a, r) { return a + pieces(r).length; }, 0);
+    status(n + " tarjetas (una por chunk) de " + out.length + " líneas.", "ok");
+  }
+  function expand() {
+    var list = [];
+    out.forEach(function (r) {
+      var ps = pieces(r), x = extra[r[9]] || { ctx: "", pos: "" };
+      var tags = String(x.pos).trim().split(/\s+/).filter(Boolean);
+      var s = parseFloat(r[6]), e = parseFloat(r[7]);
+      var hasTimes = !isNaN(s) && !isNaN(e) && e > s && ps.length > 1;
+      var total = ps.reduce(function (a, p) { return a + wordList(p).length; }, 0) || 1, acc = 0;
+      ps.forEach(function (p, i) {
+        var w = wordList(p).length, c = r.slice();
+        c[2] = p;
+        c[9] = ps.length > 1 ? r[9] + "-k" + (i + 1) : r[9];
+        if (hasTimes) {
+          if (i > 0) c[6] = half(s + (e - s) * acc / total);
+          if (i < ps.length - 1) c[7] = half(s + (e - s) * (acc + w) / total);
+        }
+        c[3] = i > 0 ? ps[i - 1] : "";
+        c[4] = i < ps.length - 1 ? ps[i + 1] : "";
+        c.push(x.ctx, tags.slice(acc, acc + w).join(" "), ps.length > 1 ? "*" + p : "");
+        acc += w;
+        list.push(c);
+      });
+    });
+    return list;
   }
 
   function build() {
@@ -174,6 +241,13 @@
     var withExtra = Object.keys(extra).length > 0;
     var head = ["#separator:comma", "#html:true", "#notetype:" + nt];
     if (deck) head.push("#deck:" + deck);
+    if ($("bychunk").checked) {
+      head.push("#columns:" + FIELDS.join(",") + ",contexto,gramatica,chunks");
+      return head.join("\n") + "\n" + expand().map(function (c) {
+        c = c.map(nullish); c[2] = clean(c[2]); c[3] = clean(c[3]); c[4] = clean(c[4]);
+        return c.map(esc).join(",");
+      }).join("\n") + "\n";
+    }
     head.push("#columns:" + FIELDS.join(",") + (withExtra ? ",contexto,gramatica" : ""));
     var body = out.map(function (r) {
       var c = r.map(nullish);
@@ -194,6 +268,7 @@
     status("Descargado: " + a.download, "ok");
   };
   ["notes", "split", "dedupe"].forEach(function (id) { $(id).onchange = function () { if (rows.length) refresh(0); }; });
+  $("bychunk").onchange = function () { if (rows.length) refresh(0); };
   $("drop").onclick = function () { $("file").click(); };
   $("drop").onkeydown = function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("file").click(); } };
   $("file").onchange = function () { load(this.files); this.value = ""; };
