@@ -45,6 +45,7 @@
       <button id="fwd" title="Adelante 1 segundo (→)">+1 s</button>
       <button id="slow" title="Velocidad lenta (S)">0.5×</button>
       <button id="loop" title="Repetir en bucle (B)">∞ Bucle</button>
+      <button id="wait" title="Espera antes de repetir el bucle (W)">⏱ 0.7 s</button>
       <button id="mute" title="Silenciar 10 s y tapar los anuncios (M)">🔊 Sonido</button>
       <button id="toggleAdj" title="Corregir inicio y fin">Ajustar</button>
     </div>
@@ -72,6 +73,7 @@
   var origEnd = parseFloat(q.get("end")); if (isNaN(origEnd) || origEnd <= origStart) origEnd = null;
   var start = origStart, end = origEnd;
   var player, timer, armed = true, rate = 1, loop = q.get("loop") !== "0", pauseT;
+  var WAITS = [0.7, 1, 2, 3, 5, 8], wait = 0.7;   // segundos de espera antes de repetir el bucle
   var $ = function (id) { return document.getElementById(id); };
 
   // ---- Ajustes guardados en este dispositivo ----
@@ -80,6 +82,7 @@
     try { var o = JSON.parse(localStorage.getItem(KEY) || "null");
       if (o) { start = o.s; end = o.e; } } catch (e) {}
     try { var r = parseFloat(localStorage.getItem("rate")); if (r === 0.5) rate = r; } catch (e) {}
+    try { var w = parseFloat(localStorage.getItem("loopWait")); if (WAITS.indexOf(w) >= 0) wait = w; } catch (e) {}
     try { var l = localStorage.getItem("loop"); if (l !== null && q.get("loop") === null) loop = l === "1"; } catch (e) {}
   }
   function save() {
@@ -102,6 +105,7 @@
     $("copyTxt").value = "startSeconds " + r1(start) + "  endSeconds " + (end === null ? "" : r1(end));
     $("slow").classList.toggle("on", rate !== 1);
     $("loop").classList.toggle("on", loop);
+    $("wait").textContent = "⏱ " + wait + " s";
   }
 
   // ---- Reproductor ----
@@ -113,7 +117,8 @@
     if (loop) {
       // Bucle: vuelve al inicio, pausa breve y sigue reproduciendo
       player.pauseVideo(); player.seekTo(start, true);
-      pauseT = setTimeout(function () { if (loop) { armed = false; player.playVideo(); } }, 700);
+      if (wait >= 2) msg("Se repite en " + wait + " s");
+      pauseT = setTimeout(function () { if (loop) { armed = false; player.playVideo(); } }, wait * 1000);
       return;
     }
     player.pauseVideo(); player.seekTo(start, true); player.pauseVideo(); armed = true;
@@ -200,6 +205,12 @@
     msg(loop ? "Bucle activado" : "Bucle desactivado");
     show();
   }
+  function nextWait() {
+    wait = WAITS[(WAITS.indexOf(wait) + 1) % WAITS.length];
+    try { localStorage.setItem("loopWait", String(wait)); } catch (e) {}
+    msg("Espera antes de repetir: " + wait + " s");
+    show();
+  }
   function toggleSlow() {
     rate = rate === 1 ? 0.5 : 1;
     if (ok()) player.setPlaybackRate(rate);
@@ -223,6 +234,7 @@
   $("play").onclick = togglePlay;
   $("slow").onclick = toggleSlow;
   $("loop").onclick = toggleLoop;
+  $("wait").onclick = nextWait;
   $("mute").onclick = toggleMute;
   $("coverX").onclick = endCover;
   $("toggleAdj").onclick = function () {
@@ -255,6 +267,7 @@
     else if (e.key === "r" || e.key === "R") repeat();
     else if (e.key === "s" || e.key === "S") toggleSlow();
     else if (e.key === "b" || e.key === "B") toggleLoop();
+    else if (e.key === "w" || e.key === "W") nextWait();
     else if (e.key === "m" || e.key === "M") toggleMute();
   });
 
