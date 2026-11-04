@@ -1,0 +1,802 @@
+WEBVTT
+
+1
+00:00:06.720 --> 00:00:09.270
+La lección pasada te prometí un segundo cerebro.
+
+2
+00:00:09.320 --> 00:00:13.570
+No era broma. Todo lo que ves en esta pantalla lo hizo un solo trabajador.
+
+3
+00:00:13.620 --> 00:00:15.730
+No duerme. No se cansa.
+
+4
+00:00:15.780 --> 00:00:18.480
+Nunca ha dicho ni una vez: "Eso no es mi trabajo".
+
+5
+00:00:18.530 --> 00:00:20.070
+Ya trabaja para ti.
+
+6
+00:00:20.120 --> 00:00:22.730
+Ha estado ahí todo este tiempo, esperando.
+
+7
+00:00:22.780 --> 00:00:24.830
+Hoy le das un trabajo de verdad.
+
+8
+00:00:24.880 --> 00:00:28.830
+Y más adelante te mostraré una línea que casi nadie piensa en escribir.
+
+9
+00:00:28.880 --> 00:00:31.190
+Es el truco más útil de esta lección.
+
+10
+00:00:31.240 --> 00:00:33.630
+Hola, soy Adil. Bienvenido de nuevo.
+
+11
+00:00:33.680 --> 00:00:38.130
+Hoy llegamos a la herramienta más importante de este curso: tu segundo cerebro.
+
+12
+00:00:38.180 --> 00:00:42.310
+Piénsalo como un empleado al que puedes llevarle casi cualquier tarea digital.
+
+13
+00:00:42.360 --> 00:00:47.420
+Lo usarás para una tarea de tu vida diaria y para una escena de tu propia imaginación.
+
+14
+00:00:47.470 --> 00:00:52.240
+Te mostraré cada paso, y ninguno de los dos escribirá el prompt del video.
+
+15
+00:00:52.290 --> 00:00:56.870
+Para eso, en la página de inicio de Higgsfield, haz clic en Supercomputer en el menú de arriba.
+
+16
+00:00:56.920 --> 00:00:58.750
+Se abre en una pestaña nueva.
+
+17
+00:00:58.800 --> 00:01:03.870
+Conociste esta herramienta la lección pasada, cuando ayudó a convertir nuestra primera idea en un prompt de video.
+
+18
+00:01:03.920 --> 00:01:08.790
+En este cuadro vacío es donde le damos el siguiente trabajo.
+
+19
+00:01:09.560 --> 00:01:12.270
+LLM significa Large Language Model, modelo de lenguaje grande.
+
+20
+00:01:12.320 --> 00:01:20.970
+Durante el entrenamiento aprende patrones de enormes cantidades de texto, y eso le permite explicar un tema difícil, escribir un guion, planear un proyecto o escribir código.
+
+21
+00:01:21.020 --> 00:01:23.510
+Tú describes el trabajo en lenguaje normal.
+
+22
+00:01:23.560 --> 00:01:26.970
+Seguramente has oído hablar de ChatGPT, Claude y Gemini.
+
+23
+00:01:27.020 --> 00:01:29.310
+Esos asistentes usan modelos de lenguaje.
+
+24
+00:01:29.360 --> 00:01:34.220
+Cada modelo tiene sus puntos fuertes: unos son más rápidos, otros están hechos para trabajos más complejos.
+
+25
+00:01:34.270 --> 00:01:36.230
+Piensa en el LLM como el cerebro.
+
+26
+00:01:36.280 --> 00:01:41.910
+Supercomputer le da un escritorio y herramientas para que pueda buscar cosas en internet y trabajar con generación de video.
+
+27
+00:01:41.960 --> 00:01:47.180
+Luego, haz clic en Auto debajo del cuadro para elegir con qué modelo de lenguaje vamos a hablar.
+
+28
+00:01:47.230 --> 00:01:49.190
+Auto ya está seleccionado.
+
+29
+00:01:49.240 --> 00:01:52.350
+Lo dejo así y cierro el menú haciendo clic fuera de él.
+
+30
+00:01:52.400 --> 00:01:55.850
+Piénsalo como el becario más inteligente del planeta en su primer día.
+
+31
+00:01:55.900 --> 00:01:56.830
+Puede que sepa tu nombre.
+
+32
+00:01:56.880 --> 00:02:01.230
+Eso no significa que sepa lo que necesitas tener listo para el viernes ni cómo puede ayudarte.
+
+33
+00:02:01.280 --> 00:02:02.680
+Así que dale un brief, unas instrucciones.
+
+34
+00:02:02.730 --> 00:02:04.810
+¿Quién eres? ¿Qué necesitas?
+
+35
+00:02:04.860 --> 00:02:06.050
+¿Qué debe hacer?
+
+36
+00:02:06.100 --> 00:02:08.760
+¿Cómo debe ser la respuesta? Eso es el contexto.
+
+37
+00:02:08.810 --> 00:02:10.990
+Lo que necesita saber sobre tu tarea.
+
+38
+00:02:11.040 --> 00:02:15.490
+Puede incluir tus notas, un brief, una hoja de cálculo, imágenes o un video de referencia.
+
+39
+00:02:15.540 --> 00:02:18.950
+Lo que sea útil, en un formato que tu herramienta pueda leer.
+
+40
+00:02:19.000 --> 00:02:20.610
+Las cuatro partes del contexto.
+
+41
+00:02:20.660 --> 00:02:22.840
+Soy, necesito, haz, formato.
+
+42
+00:02:22.890 --> 00:02:29.630
+No tienes que escribir las etiquetas, solo incluye la información.
+
+43
+00:02:29.680 --> 00:02:33.150
+Necesito elegir noticias de IA para mi canal de YouTube esta semana.
+
+44
+00:02:33.200 --> 00:02:35.470
+Veamos qué hace nuestro nuevo empleado con esto.
+
+45
+00:02:35.520 --> 00:02:40.920
+En el cuadro de mensaje escribo "búscame noticias de IA" y hago clic en la flecha de enviar.
+
+46
+00:02:40.970 --> 00:02:43.710
+Veamos qué trae.
+
+47
+00:02:43.760 --> 00:02:48.730
+Bien, me dio un resumen de esta semana con fuentes.
+
+48
+00:02:48.780 --> 00:02:50.430
+Es un buen comienzo.
+
+49
+00:02:50.480 --> 00:02:57.680
+Pero nunca puse "esta semana" en el mensaje, y no le he dicho quién ve mi canal ni qué voy a hacer con las noticias.
+
+50
+00:02:57.730 --> 00:03:00.350
+Tuvo que tomar esas decisiones por mí.
+
+51
+00:03:00.400 --> 00:03:02.770
+Digámosle al becario para qué es esta lista.
+
+52
+00:03:02.820 --> 00:03:04.810
+Un hábito antes de volver a intentarlo.
+
+53
+00:03:04.860 --> 00:03:07.150
+Mantén cada trabajo en su propio chat.
+
+54
+00:03:07.200 --> 00:03:10.870
+Tu lista de compras no necesita un papel secundario en tu película espacial.
+
+55
+00:03:10.920 --> 00:03:12.830
+Mismo trabajo, mismo chat.
+
+56
+00:03:12.880 --> 00:03:14.610
+Trabajo nuevo, chat nuevo.
+
+57
+00:03:14.660 --> 00:03:16.810
+Normalmente añadiría aquí mismo los detalles que faltan.
+
+58
+00:03:16.860 --> 00:03:19.890
+Abro un chat nuevo solo para comparar los dos briefs.
+
+59
+00:03:19.940 --> 00:03:22.770
+Mira cómo le doy a ese becario un brief de verdad.
+
+60
+00:03:22.820 --> 00:03:26.010
+Hago videos de YouTube sobre IA generativa.
+
+61
+00:03:26.060 --> 00:03:31.590
+Investiga las noticias de IA más importantes de los últimos días y ordénalas de la más viral a la menos.
+
+62
+00:03:31.640 --> 00:03:35.560
+Para cada una, una línea sobre por qué le importaría a mi audiencia.
+
+63
+00:03:35.610 --> 00:03:38.310
+Ahora hago clic en la flecha de enviar.
+
+64
+00:03:38.360 --> 00:03:39.110
+Ahí está.
+
+65
+00:03:39.160 --> 00:03:43.960
+Las noticias están ordenadas y cada historia trae una razón por la que le importaría a mi audiencia.
+
+66
+00:03:44.010 --> 00:03:46.390
+Es un buen primer día de trabajo.
+
+67
+00:03:46.440 --> 00:03:54.010
+De esta lista corta puedo elegir una historia, pedir tres versiones del guion y luego usar Supercomputer para generar clips para la edición.
+
+68
+00:03:54.060 --> 00:03:55.970
+Mismo proyecto, mismo chat.
+
+69
+00:03:56.020 --> 00:03:58.490
+Y una lista de noticias es un trabajo pequeño.
+
+70
+00:03:58.540 --> 00:04:10.610
+Dale a un LLM que sepa programar investigación y referencias, y puede ayudarte a escribir el código de una escena 3D interactiva, como un motor que se ensambla solo y luego muestra sus piezas móviles en acción.
+
+71
+00:04:10.660 --> 00:04:15.350
+Igual tienes que probar el resultado, pero el punto de partida es el mismo.
+
+72
+00:04:15.400 --> 00:04:18.990
+Explica lo que quieres hacer y dale el material que necesita.
+
+73
+00:04:19.040 --> 00:04:25.390
+Puedes usar esas cuatro partes para un mensaje a un cliente, una lista de equipaje o un plan para mañana.
+
+74
+00:04:25.440 --> 00:04:29.830
+Pausa aquí y pruébalo con una tarea que de verdad necesites hacer esta semana.
+
+75
+00:04:29.880 --> 00:04:34.700
+Abre un chat nuevo y usa las cuatro partes de la pantalla para explicar el trabajo.
+
+76
+00:04:34.750 --> 00:04:37.490
+Compara la respuesta con el trabajo que le diste.
+
+77
+00:04:37.540 --> 00:04:41.350
+¿Incluye los detalles que necesitas, en una forma que puedas usar?
+
+78
+00:04:41.400 --> 00:04:43.370
+Verifica cualquier dato del que vayas a depender.
+
+79
+00:04:43.420 --> 00:04:47.600
+Si falta algo importante, añade ese detalle en el mismo chat.
+
+80
+00:04:47.650 --> 00:04:54.890
+Yo trabajaba de bartender y esta idea se me ocurrió mientras trabajaba.
+
+81
+00:04:55.420 --> 00:04:57.810
+Démosle esa escena a nuestro empleado.
+
+82
+00:04:57.860 --> 00:04:59.140
+Esto es todo lo que traigo.
+
+83
+00:04:59.190 --> 00:05:02.230
+Un bartender cierra su bar vacío a las tres de la mañana.
+
+84
+00:05:02.280 --> 00:05:09.410
+Apaga las luces una por una y, cuando apaga la última, camina despacio hasta el gran ventanal y se queda ahí.
+
+85
+00:05:09.460 --> 00:05:12.470
+Triste y cansado, mirando a lo lejos.
+
+86
+00:05:12.520 --> 00:05:16.150
+Al otro lado de la ventana, a lo lejos en la oscuridad, flota la Tierra.
+
+87
+00:05:16.200 --> 00:05:19.210
+Su bar está en el espacio. Tres frases.
+
+88
+00:05:19.260 --> 00:05:21.050
+¿Quién, dónde, qué pasa?
+
+89
+00:05:21.100 --> 00:05:25.620
+Nada sobre lentes o ángulos de cámara, solo una escena que quiero ver.
+
+90
+00:05:25.670 --> 00:05:28.870
+Quiero ser el bartender, así que adjuntaré mi foto.
+
+91
+00:05:28.920 --> 00:05:31.710
+Ahora, podría decirle simplemente "escríbeme un prompt".
+
+92
+00:05:31.760 --> 00:05:34.110
+Pero ¿cómo sabría lo que tengo en mente?
+
+93
+00:05:34.160 --> 00:05:35.890
+Esta es la línea que te prometí.
+
+94
+00:05:35.940 --> 00:05:39.210
+Antes de que escriba el prompt, haz que te entreviste.
+
+95
+00:05:39.260 --> 00:05:40.230
+Pídele que te haga preguntas.
+
+96
+00:05:40.280 --> 00:05:44.220
+Una buena pregunta puede hacerte notar una decisión que aún no has tomado.
+
+97
+00:05:44.270 --> 00:05:46.530
+¿Madera cálida o metal frío?
+
+98
+00:05:46.580 --> 00:05:47.820
+¿Solitario o asustado?
+
+99
+00:05:47.870 --> 00:05:52.610
+Si empieza a redactar de inmediato, envía otro mensaje pidiéndole primero las preguntas.
+
+100
+00:05:52.660 --> 00:05:56.130
+Es un trabajo nuevo, así que hago clic en "nuevo chat" en la barra lateral.
+
+101
+00:05:56.180 --> 00:06:00.450
+Debajo del cuadro, abre el modo de preguntas y marca "preguntar antes de generar".
+
+102
+00:06:00.500 --> 00:06:03.610
+Quiero aprobar la solicitud antes de que se genere nada.
+
+103
+00:06:03.660 --> 00:06:06.510
+Las preguntas creativas van en el propio mensaje.
+
+104
+00:06:06.560 --> 00:06:11.150
+Para la foto, haz clic en el más junto al cuadro de mensaje y luego en "adjuntar archivo".
+
+105
+00:06:11.200 --> 00:06:14.590
+En recursos, haz clic en "subir medios" y elige tu foto.
+
+106
+00:06:14.640 --> 00:06:20.770
+Espera a que su miniatura aparezca junto al mensaje, luego escribe la idea y dile que use a la persona de esa foto.
+
+107
+00:06:20.820 --> 00:06:26.790
+Debajo añado: antes de escribir el prompt del video, hazme las preguntas que necesitas que responda para que esto quede genial.
+
+108
+00:06:26.840 --> 00:06:29.630
+Escribe el prompt solo después de que yo haya respondido.
+
+109
+00:06:29.680 --> 00:06:31.290
+Ahora, haz clic en la flecha de enviar.
+
+110
+00:06:31.340 --> 00:06:32.990
+Veamos qué necesita saber.
+
+111
+00:06:33.040 --> 00:06:37.650
+Mientras respondes, piensa en lo que debemos ver, oír y sentir.
+
+112
+00:06:37.700 --> 00:06:40.590
+Para el encuadre, elijo 16:9.
+
+113
+00:06:40.640 --> 00:06:43.310
+Para la duración, elijo 15 segundos.
+
+114
+00:06:43.360 --> 00:06:45.870
+Cada elección me lleva directo a la siguiente pregunta.
+
+115
+00:06:45.920 --> 00:06:48.250
+Luego pregunta qué sensación debe transmitir el bar.
+
+116
+00:06:48.300 --> 00:06:51.210
+Elijo "otra cosa" y escribo "realista".
+
+117
+00:06:51.260 --> 00:06:55.370
+Un bar cálido de madera con gravedad normal, no un set de ciencia ficción con neones.
+
+118
+00:06:55.420 --> 00:06:57.210
+Luego hago clic en continuar.
+
+119
+00:06:57.260 --> 00:06:58.490
+Ahora la cámara.
+
+120
+00:06:58.540 --> 00:07:03.330
+Elijo "otra cosa" y escribo: un solo movimiento de cámara lento y continuo hacia la ventana.
+
+121
+00:07:03.380 --> 00:07:05.690
+Deja la ventana fuera del encuadre inicial.
+
+122
+00:07:05.740 --> 00:07:09.230
+Revela la Tierra solo cuando él llegue a la ventana al final.
+
+123
+00:07:09.280 --> 00:07:10.740
+Luego hago clic en continuar.
+
+124
+00:07:10.790 --> 00:07:14.090
+Para el sonido, elijo solo sonidos diegéticos, sin música.
+
+125
+00:07:14.140 --> 00:07:16.290
+Eso envía las cinco respuestas.
+
+126
+00:07:16.340 --> 00:07:19.690
+Aquí está el resumen. Compruebo que respetó las decisiones que tomé.
+
+127
+00:07:19.740 --> 00:07:21.330
+Tus preguntas pueden ser distintas.
+
+128
+00:07:21.380 --> 00:07:24.770
+Elige las respuestas que encajen con tu idea y añade lo importante que se le haya pasado.
+
+129
+00:07:24.820 --> 00:07:26.790
+Ahí está el prompt. Yo no lo escribí.
+
+130
+00:07:26.840 --> 00:07:30.750
+Respondí preguntas. Veamos si nuestro empleado escuchó. Un momento.
+
+131
+00:07:30.800 --> 00:07:33.570
+Empieza solo con la última luz.
+
+132
+00:07:33.620 --> 00:07:36.070
+Yo quería que las apagara una por una.
+
+133
+00:07:36.120 --> 00:07:38.090
+Esta es la nota que envié en el mismo chat.
+
+134
+00:07:38.140 --> 00:07:42.730
+Muéstralo apagando varias luces una por una antes de caminar despacio hacia la ventana.
+
+135
+00:07:42.780 --> 00:07:45.700
+Ahora bajo hasta la revisión. Ahí está.
+
+136
+00:07:45.750 --> 00:07:47.850
+Las luces se apagan en secuencia.
+
+137
+00:07:47.900 --> 00:07:49.810
+Ahora las instrucciones coinciden con la escena.
+
+138
+00:07:49.860 --> 00:07:53.930
+Si añade o cambia algo que no quieres, corrige primero el texto.
+
+139
+00:07:53.980 --> 00:07:55.910
+Pregunta por cualquier línea que no esté clara.
+
+140
+00:07:55.960 --> 00:07:58.590
+El prompt debe seguir describiendo tu idea.
+
+141
+00:07:58.640 --> 00:08:01.650
+Recuerda la lección uno. Una generación es una toma.
+
+142
+00:08:01.700 --> 00:08:04.830
+Esta es un ensayo, así que pediré un borrador en 480p.
+
+143
+00:08:04.880 --> 00:08:10.010
+Pido un borrador panorámico de 15 segundos en 480p usando mi foto.
+
+144
+00:08:10.060 --> 00:08:11.790
+Luego hago clic en la flecha de enviar.
+
+145
+00:08:11.840 --> 00:08:15.390
+Revisa los ajustes y el precio, y haz clic en aprobar para generar.
+
+146
+00:08:15.440 --> 00:08:18.290
+Pausa aquí y elige un momento que quieras ver en pantalla.
+
+147
+00:08:18.340 --> 00:08:20.250
+Descríbelo en tres frases.
+
+148
+00:08:20.300 --> 00:08:23.470
+Quién está ahí, dónde está y qué pasa.
+
+149
+00:08:23.520 --> 00:08:27.370
+Usa una persona y un lugar para este ejercicio.
+
+150
+00:08:27.420 --> 00:08:29.870
+Adjunta tu foto si quieres salir en él.
+
+151
+00:08:29.920 --> 00:08:34.050
+Pide la entrevista, responde las preguntas y luego lee el prompt.
+
+152
+00:08:34.100 --> 00:08:37.970
+Pide un borrador panorámico de 15 segundos en 480p.
+
+153
+00:08:38.020 --> 00:08:40.550
+Dos borradores es el límite para este ejercicio.
+
+154
+00:08:40.600 --> 00:08:45.080
+Vuelve cuando tu video esté listo. El mío ya está.
+
+155
+00:08:45.130 --> 00:08:52.020
+Haz clic en la miniatura del video y reprodúcelo desde el principio. Veamos.
+
+156
+00:09:04.060 --> 00:09:08.850
+Puedes ver lo rápido que una idea se convierte en algo que de verdad puedes ver.
+
+157
+00:09:08.900 --> 00:09:14.160
+Acabamos de llevar una escena de mi imaginación a la pantalla. Justo aquí.
+
+158
+00:09:14.210 --> 00:09:20.130
+Me gusta el bar cálido y el ambiente tranquilo, pero vemos la ventana antes de que yo llegue.
+
+159
+00:09:20.180 --> 00:09:21.950
+Quiero guardar eso para el final.
+
+160
+00:09:22.000 --> 00:09:25.150
+Si una escena necesita una nota, no despido a todo el equipo.
+
+161
+00:09:25.200 --> 00:09:27.190
+Solo le digo lo que quiero cambiar.
+
+162
+00:09:27.240 --> 00:09:29.830
+Escribo la nota que ves aquí.
+
+163
+00:09:29.880 --> 00:09:34.090
+Deja la ventana fuera del encuadre inicial y revela la Tierra al final.
+
+164
+00:09:34.140 --> 00:09:40.040
+Mantén igual la persona, el bar, la acción y el ambiente, y reescribe el prompt antes de generar.
+
+165
+00:09:40.090 --> 00:09:44.290
+Luego hago clic en la flecha de enviar aquí mismo, en el mismo chat.
+
+166
+00:09:44.340 --> 00:09:48.590
+Me da un prompt nuevo, pero le añade cortinas al bar.
+
+167
+00:09:48.640 --> 00:09:52.050
+Ese no es el cambio que pedí, así que lo corrijo otra vez.
+
+168
+00:09:52.100 --> 00:09:54.570
+Sigo cambiando solo el texto.
+
+169
+00:09:54.620 --> 00:09:57.430
+Unos momentos después, me da otro prompt.
+
+170
+00:09:57.480 --> 00:10:02.640
+Lo leo completo, compruebo que los cambios coinciden con mi idea e inicio la generación.
+
+171
+00:10:02.690 --> 00:10:04.190
+Aquí está la nueva versión.
+
+172
+00:10:04.240 --> 00:10:08.630
+Haz clic en la miniatura y veamos.
+
+173
+00:10:21.880 --> 00:10:23.360
+Ahora compara ese momento.
+
+174
+00:10:23.410 --> 00:10:25.950
+¿La ventana aparece cuando yo quería?
+
+175
+00:10:26.000 --> 00:10:27.630
+Eso es lo que estoy comprobando.
+
+176
+00:10:27.680 --> 00:10:29.190
+La idea sigue siendo mía.
+
+177
+00:10:29.240 --> 00:10:34.290
+Le di mi opinión en lenguaje normal e hizo otra versión.
+
+178
+00:10:36.660 --> 00:10:40.250
+Ese es el ciclo: idea, prompt, resultado, ajuste.
+
+179
+00:10:40.300 --> 00:10:43.510
+Después de una toma, elige un cambio importante para el siguiente borrador.
+
+180
+00:10:43.560 --> 00:10:44.800
+Quédate en el mismo chat.
+
+181
+00:10:44.850 --> 00:10:47.490
+Pausa y mira tu video completo.
+
+182
+00:10:47.540 --> 00:10:51.130
+Compara la persona, el lugar y la acción principal con tu idea.
+
+183
+00:10:51.180 --> 00:10:53.270
+Luego revisa el momento que más te importaba.
+
+184
+00:10:53.320 --> 00:10:54.870
+¿Pasó como querías?
+
+185
+00:10:54.920 --> 00:10:58.750
+Si algo necesita arreglo, describe el cambio en lenguaje normal.
+
+186
+00:10:58.800 --> 00:11:02.690
+Lee el prompt actualizado y luego genera otra versión si la necesitas.
+
+187
+00:11:02.740 --> 00:11:06.770
+Quédate con una toma que funcione; para después de dos borradores como máximo.
+
+188
+00:11:06.820 --> 00:11:10.700
+Guarda la versión que prefieras, anota lo que haya quedado pendiente y vuelve.
+
+189
+00:11:10.750 --> 00:11:14.030
+Mira con qué empezamos.
+
+190
+00:11:14.080 --> 00:11:18.510
+Un párrafo sobre mi trabajo y tres frases que podría haberle mandado por mensaje a un amigo.
+
+191
+00:11:18.560 --> 00:11:22.570
+Ahora tengo una lista corta de investigación y un borrador de esa escena.
+
+192
+00:11:22.620 --> 00:11:28.070
+Algo que puedo usar y algo que quería ver.
+
+193
+00:11:28.120 --> 00:11:35.370
+Tu tarea es usar tu segundo cerebro para una tarea real y crear una escena de 15 segundos a partir de tu propia idea.
+
+194
+00:11:35.420 --> 00:11:38.570
+Si seguiste las pausas, ya empezaste.
+
+195
+00:11:38.620 --> 00:11:40.730
+Ahora termina y guarda tu trabajo.
+
+196
+00:11:40.780 --> 00:11:46.060
+Guarda la respuesta útil y el video que elegiste, junto con la idea y el prompt que lo produjeron.
+
+197
+00:11:46.110 --> 00:11:52.080
+Añade dos notas cortas: qué pediste y qué mantuviste o cambiaste, y por qué.
+
+198
+00:11:52.130 --> 00:11:57.650
+En la próxima lección aprenderás a crear contenido y anuncios para cualquier negocio en minutos.
+
+199
+00:11:57.700 --> 00:12:04.270
+Fotos de producto, publicaciones para redes, un anuncio en video, todo a partir de la foto de un objeto común.
+
+200
+00:12:04.320 --> 00:12:11.080
+Así que trae algo que tengas, una botella, una taza o un par de zapatos, y no te lo pierdas.
+

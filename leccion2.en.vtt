@@ -1,0 +1,802 @@
+WEBVTT
+
+1
+00:00:06.720 --> 00:00:09.270
+Last lesson. I promised you a second brain.
+
+2
+00:00:09.320 --> 00:00:13.570
+I wasn't joking. Everything on this screen was done by one worker.
+
+3
+00:00:13.620 --> 00:00:15.730
+It doesn't sleep. It doesn't get tired.
+
+4
+00:00:15.780 --> 00:00:18.480
+It has never once said, "That's not my job."
+
+5
+00:00:18.530 --> 00:00:20.070
+It already works for you.
+
+6
+00:00:20.120 --> 00:00:22.730
+It's been sitting there this whole time, waiting.
+
+7
+00:00:22.780 --> 00:00:24.830
+Today, you give it a real job.
+
+8
+00:00:24.880 --> 00:00:28.830
+And later, I'll show you one line almost nobody thinks to type.
+
+9
+00:00:28.880 --> 00:00:31.190
+It's the most useful trick in this lesson.
+
+10
+00:00:31.240 --> 00:00:33.630
+Hi, I'm Adil. Welcome back.
+
+11
+00:00:33.680 --> 00:00:38.130
+Today, we get to the most important tool in this course, your second brain.
+
+12
+00:00:38.180 --> 00:00:42.310
+Think of it as an employee you can bring almost any digital task to.
+
+13
+00:00:42.360 --> 00:00:47.420
+You'll use it for a task from your everyday life and a scene from your own imagination.
+
+14
+00:00:47.470 --> 00:00:52.240
+I'll show you each step, and neither of us will write the video prompt.
+
+15
+00:00:52.290 --> 00:00:56.870
+To do that, on the Higgsfield homepage, click Supercomputer in the top menu.
+
+16
+00:00:56.920 --> 00:00:58.750
+It opens in a new tab.
+
+17
+00:00:58.800 --> 00:01:03.870
+You met this tool last lesson when it helped turn our first idea into a video prompt.
+
+18
+00:01:03.920 --> 00:01:08.790
+This empty box is where we give it the next job.
+
+19
+00:01:09.560 --> 00:01:12.270
+LLM stands for Large Language Model.
+
+20
+00:01:12.320 --> 00:01:20.970
+During training, it learns patterns from huge amounts of text that lets it explain a difficult subject, write a script, plan a project, or write code.
+
+21
+00:01:21.020 --> 00:01:23.510
+You describe the job in ordinary language.
+
+22
+00:01:23.560 --> 00:01:26.970
+You've probably heard of ChatGPT, Claude, and Gemini.
+
+23
+00:01:27.020 --> 00:01:29.310
+Those assistants use language models.
+
+24
+00:01:29.360 --> 00:01:34.220
+Different models have different strengths, some are faster, others are built for more complex work.
+
+25
+00:01:34.270 --> 00:01:36.230
+Think of the LLM as the brain.
+
+26
+00:01:36.280 --> 00:01:41.910
+Supercomputer gives it a desk and tools so it can look things up online and work with video generation.
+
+27
+00:01:41.960 --> 00:01:47.180
+Next, click Auto under the box to choose which language model we'll talk to.
+
+28
+00:01:47.230 --> 00:01:49.190
+Auto is already selected.
+
+29
+00:01:49.240 --> 00:01:52.350
+I'll leave it there, and close the menu by clicking outside it.
+
+30
+00:01:52.400 --> 00:01:55.850
+Think of it as the smartest intern on Earth on day one.
+
+31
+00:01:55.900 --> 00:01:56.830
+It may know your name.
+
+32
+00:01:56.880 --> 00:02:01.230
+That doesn't mean it knows what you need to get done by Friday and how it can help you.
+
+33
+00:02:01.280 --> 00:02:02.680
+So give it a brief.
+
+34
+00:02:02.730 --> 00:02:04.810
+Who are you? What do you need?
+
+35
+00:02:04.860 --> 00:02:06.050
+What should it do?
+
+36
+00:02:06.100 --> 00:02:08.760
+What should the answer look like? That's context.
+
+37
+00:02:08.810 --> 00:02:10.990
+What it needs to know about your task.
+
+38
+00:02:11.040 --> 00:02:15.490
+It can include your notes, a brief, a spreadsheet, images, or a reference video.
+
+39
+00:02:15.540 --> 00:02:18.950
+Whatever is useful in a format your tool can read.
+
+40
+00:02:19.000 --> 00:02:20.610
+Four parts of the context.
+
+41
+00:02:20.660 --> 00:02:22.840
+I am, I need, do, format.
+
+42
+00:02:22.890 --> 00:02:29.630
+You don't have to type the labels, just include the information.
+
+43
+00:02:29.680 --> 00:02:33.150
+I need to choose AI news for my YouTube channel this week.
+
+44
+00:02:33.200 --> 00:02:35.470
+Let's see what our new employee makes of this.
+
+45
+00:02:35.520 --> 00:02:40.920
+In the message box, I type find me AI news, then click the send arrow.
+
+46
+00:02:40.970 --> 00:02:43.710
+Let's see what it brings back.
+
+47
+00:02:43.760 --> 00:02:48.730
+Okay, it gave me a roundup for this week with sources.
+
+48
+00:02:48.780 --> 00:02:50.430
+That's a useful start.
+
+49
+00:02:50.480 --> 00:02:57.680
+But I never put this week in the message and I haven't told it who watches my channel or what I'm going to do with the news.
+
+50
+00:02:57.730 --> 00:03:00.350
+It had to make those choices for me.
+
+51
+00:03:00.400 --> 00:03:02.770
+Let's tell the intern what this list is for.
+
+52
+00:03:02.820 --> 00:03:04.810
+One habit before we try again.
+
+53
+00:03:04.860 --> 00:03:07.150
+Keep each job in its own chat.
+
+54
+00:03:07.200 --> 00:03:10.870
+Your shopping list doesn't need a supporting role in your space movie.
+
+55
+00:03:10.920 --> 00:03:12.830
+Same job, same chat.
+
+56
+00:03:12.880 --> 00:03:14.610
+New job, new chat.
+
+57
+00:03:14.660 --> 00:03:16.810
+Normally I'd add the missing details right here.
+
+58
+00:03:16.860 --> 00:03:19.890
+I'm opening a fresh chat only to compare the two briefs.
+
+59
+00:03:19.940 --> 00:03:22.770
+Watch me give that intern an actual brief.
+
+60
+00:03:22.820 --> 00:03:26.010
+I make YouTube videos about generative AI.
+
+61
+00:03:26.060 --> 00:03:31.590
+Research the most important AI news from the last few days and rank it most trending first.
+
+62
+00:03:31.640 --> 00:03:35.560
+For each item, one line on why my audience would care.
+
+63
+00:03:35.610 --> 00:03:38.310
+Now I click the send arrow.
+
+64
+00:03:38.360 --> 00:03:39.110
+There we go.
+
+65
+00:03:39.160 --> 00:03:43.960
+The news is ranked and each story comes with a reason my audience would care.
+
+66
+00:03:44.010 --> 00:03:46.390
+That's a useful first day on the job.
+
+67
+00:03:46.440 --> 00:03:54.010
+From this shortlist, I can choose a story, ask for three script versions, then use supercomputer to generate clips for the edit.
+
+68
+00:03:54.060 --> 00:03:55.970
+Same project, same chat.
+
+69
+00:03:56.020 --> 00:03:58.490
+And a news list is a small job.
+
+70
+00:03:58.540 --> 00:04:10.610
+Give a coding capable LLM research and references and it can help write the code for an interactive 3D scene like an engine that assembles itself then shows its moving parts in action.
+
+71
+00:04:10.660 --> 00:04:15.350
+You still need to test the result but the starting point is the same.
+
+72
+00:04:15.400 --> 00:04:18.990
+Explain what you want to make and give it the material it needs.
+
+73
+00:04:19.040 --> 00:04:25.390
+You can use those four parts for a customer message, a packing list or a plan for tomorrow.
+
+74
+00:04:25.440 --> 00:04:29.830
+Pause here and try it with a task you actually need done this week.
+
+75
+00:04:29.880 --> 00:04:34.700
+Open a new chat and use the four parts on screen to explain the job.
+
+76
+00:04:34.750 --> 00:04:37.490
+Read the answer against the job you gave it.
+
+77
+00:04:37.540 --> 00:04:41.350
+Does it include the details you need in a form you can use?
+
+78
+00:04:41.400 --> 00:04:43.370
+Check any facts you'll rely on.
+
+79
+00:04:43.420 --> 00:04:47.600
+If something important is missing, add that detail in the same chat.
+
+80
+00:04:47.650 --> 00:04:54.890
+I used to work as a bartender and this idea came to me while I was working.
+
+81
+00:04:55.420 --> 00:04:57.810
+Let's give our employee that scene.
+
+82
+00:04:57.860 --> 00:04:59.140
+Here's all I'm bringing.
+
+83
+00:04:59.190 --> 00:05:02.230
+A bartender closes his empty bar at three in the morning.
+
+84
+00:05:02.280 --> 00:05:09.410
+He switches the lights off one by one and when he kills the last light, he walks slowly to the big window and stands there.
+
+85
+00:05:09.460 --> 00:05:12.470
+Sad and tired, looking far into the distance.
+
+86
+00:05:12.520 --> 00:05:16.150
+Outside the window, far away in the dark, hangs the earth.
+
+87
+00:05:16.200 --> 00:05:19.210
+His bar is in space. Three sentences.
+
+88
+00:05:19.260 --> 00:05:21.050
+Who, where, what happens?
+
+89
+00:05:21.100 --> 00:05:25.620
+Nothing about lenses or camera angles, just a scene I want to see.
+
+90
+00:05:25.670 --> 00:05:28.870
+I want to be the bartender so I'll attach my photo.
+
+91
+00:05:28.920 --> 00:05:31.710
+Now, I could just say, write me a prompt.
+
+92
+00:05:31.760 --> 00:05:34.110
+But how would it know what I have in mind?
+
+93
+00:05:34.160 --> 00:05:35.890
+Here's the line I promised you.
+
+94
+00:05:35.940 --> 00:05:39.210
+Before it writes the prompt, make it interview you.
+
+95
+00:05:39.260 --> 00:05:40.230
+Ask it to ask you.
+
+96
+00:05:40.280 --> 00:05:44.220
+A good question can make you notice a choice you haven't made yet.
+
+97
+00:05:44.270 --> 00:05:46.530
+Warm wood or cold metal?
+
+98
+00:05:46.580 --> 00:05:47.820
+Lonely or frightened?
+
+99
+00:05:47.870 --> 00:05:52.610
+If it starts drafting straight away, send another message asking for the questions first.
+
+100
+00:05:52.660 --> 00:05:56.130
+It's a new job, so I click new chat in the sidebar.
+
+101
+00:05:56.180 --> 00:06:00.450
+Under the box, open ask mode and check ask before generating.
+
+102
+00:06:00.500 --> 00:06:03.610
+I want to approve the request before anything is generated.
+
+103
+00:06:03.660 --> 00:06:06.510
+The creative questions go in the message itself.
+
+104
+00:06:06.560 --> 00:06:11.150
+For the photo, click the plus beside the message box, then attach file.
+
+105
+00:06:11.200 --> 00:06:14.590
+In assets, click upload media and choose your photo.
+
+106
+00:06:14.640 --> 00:06:20.770
+Wait until its thumbnail appears beside the message, then type the idea and tell it to use the person in that photo.
+
+107
+00:06:20.820 --> 00:06:26.790
+Underneath, I add, before you write the video prompt, ask me the questions you need answered to make this great.
+
+108
+00:06:26.840 --> 00:06:29.630
+Write the prompt only after I've answered.
+
+109
+00:06:29.680 --> 00:06:31.290
+Now, click the send arrow.
+
+110
+00:06:31.340 --> 00:06:32.990
+Let's see what it needs to know.
+
+111
+00:06:33.040 --> 00:06:37.650
+As you answer, think about what we should see, hear, and feel.
+
+112
+00:06:37.700 --> 00:06:40.590
+For the frame, I click 16 by 9.
+
+113
+00:06:40.640 --> 00:06:43.310
+For the length, I click 15 seconds.
+
+114
+00:06:43.360 --> 00:06:45.870
+Each choice takes me straight to the next question.
+
+115
+00:06:45.920 --> 00:06:48.250
+Next, it asks what the bar should feel like.
+
+116
+00:06:48.300 --> 00:06:51.210
+I choose something else and type realistic.
+
+117
+00:06:51.260 --> 00:06:55.370
+A warm wooden bar with normal gravity, not a neon sci-fi set.
+
+118
+00:06:55.420 --> 00:06:57.210
+Then I click continue.
+
+119
+00:06:57.260 --> 00:06:58.490
+Now the camera.
+
+120
+00:06:58.540 --> 00:07:03.330
+I choose something else and type one continuous slow camera move towards the window.
+
+121
+00:07:03.380 --> 00:07:05.690
+Keep the window outside the opening frame.
+
+122
+00:07:05.740 --> 00:07:09.230
+Reveal the earth only when he reaches the window at the end.
+
+123
+00:07:09.280 --> 00:07:10.740
+Then I click continue.
+
+124
+00:07:10.790 --> 00:07:14.090
+For sound, I click diegetic sounds only, no music.
+
+125
+00:07:14.140 --> 00:07:16.290
+That sends all five answers.
+
+126
+00:07:16.340 --> 00:07:19.690
+Here's the summary. I check that it kept the choices I made.
+
+127
+00:07:19.740 --> 00:07:21.330
+Your questions may be different.
+
+128
+00:07:21.380 --> 00:07:24.770
+Pick the answers that fit your idea and add anything important it missed.
+
+129
+00:07:24.820 --> 00:07:26.790
+There's the prompt. I didn't write it.
+
+130
+00:07:26.840 --> 00:07:30.750
+I answered questions. Let's see whether our employee listened. Hang on.
+
+131
+00:07:30.800 --> 00:07:33.570
+It starts with just the last light.
+
+132
+00:07:33.620 --> 00:07:36.070
+I wanted him to switch them off one by one.
+
+133
+00:07:36.120 --> 00:07:38.090
+Here's the note I sent in the same chat.
+
+134
+00:07:38.140 --> 00:07:42.730
+Show him switching several lights off one by one before the slow walk to the window.
+
+135
+00:07:42.780 --> 00:07:45.700
+Now I scroll to the revision. There.
+
+136
+00:07:45.750 --> 00:07:47.850
+The lights go off in sequence.
+
+137
+00:07:47.900 --> 00:07:49.810
+Now the instructions match the scene.
+
+138
+00:07:49.860 --> 00:07:53.930
+If it adds or changes something you don't want, fix the text first.
+
+139
+00:07:53.980 --> 00:07:55.910
+Ask about any unclear line.
+
+140
+00:07:55.960 --> 00:07:58.590
+The prompt should still describe your idea.
+
+141
+00:07:58.640 --> 00:08:01.650
+Remember lesson one. A generation is a take.
+
+142
+00:08:01.700 --> 00:08:04.830
+This one's a rehearsal, so I'll request a 480p draft.
+
+143
+00:08:04.880 --> 00:08:10.010
+I ask for a 15 second widescreen draft at 480p using my photo.
+
+144
+00:08:10.060 --> 00:08:11.790
+Then I click the send arrow.
+
+145
+00:08:11.840 --> 00:08:15.390
+Check the settings and price, then click approve to generate.
+
+146
+00:08:15.440 --> 00:08:18.290
+Pause here and choose a moment you want to see on screen.
+
+147
+00:08:18.340 --> 00:08:20.250
+Describe it in three sentences.
+
+148
+00:08:20.300 --> 00:08:23.470
+Who is there, where they are and what happens.
+
+149
+00:08:23.520 --> 00:08:27.370
+Use one person and one location for this exercise.
+
+150
+00:08:27.420 --> 00:08:29.870
+Attach your photo if you want to be in it.
+
+151
+00:08:29.920 --> 00:08:34.050
+Ask for the interview, answer the questions, then read the prompt.
+
+152
+00:08:34.100 --> 00:08:37.970
+Request one 15 second widescreen draft at 480p.
+
+153
+00:08:38.020 --> 00:08:40.550
+Two drafts is the limit for this exercise.
+
+154
+00:08:40.600 --> 00:08:45.080
+Come back when your video is ready. Mine's ready.
+
+155
+00:08:45.130 --> 00:08:52.020
+Click the video thumbnail and play it from the beginning. Let's watch.
+
+156
+00:09:04.060 --> 00:09:08.850
+You can see how quickly an idea becomes something you can actually watch.
+
+157
+00:09:08.900 --> 00:09:14.160
+We just took a scene from my imagination and brought it to the screen. Right here.
+
+158
+00:09:14.210 --> 00:09:20.130
+I like the warm bar and the quiet mood, but we see the window before I get there.
+
+159
+00:09:20.180 --> 00:09:21.950
+I want to save that for the end.
+
+160
+00:09:22.000 --> 00:09:25.150
+If a scene needs one note, I don't fire the whole crew.
+
+161
+00:09:25.200 --> 00:09:27.190
+I just tell it what I want changed.
+
+162
+00:09:27.240 --> 00:09:29.830
+I write the note you see here.
+
+163
+00:09:29.880 --> 00:09:34.090
+Keep the window outside the opening frame and reveal earth at the end.
+
+164
+00:09:34.140 --> 00:09:40.040
+Keep the person, bar, action and mood the same and rewrite the prompt before generating.
+
+165
+00:09:40.090 --> 00:09:44.290
+Then I click the send arrow right here in the same chat.
+
+166
+00:09:44.340 --> 00:09:48.590
+He gives me a new prompt but adds curtains to the bar.
+
+167
+00:09:48.640 --> 00:09:52.050
+That's not the change I asked for, so I correct him again.
+
+168
+00:09:52.100 --> 00:09:54.570
+I'm still only changing the text.
+
+169
+00:09:54.620 --> 00:09:57.430
+A few moments later, he gives me another prompt.
+
+170
+00:09:57.480 --> 00:10:02.640
+I read through it, check that the changes match my idea and start the generation.
+
+171
+00:10:02.690 --> 00:10:04.190
+Here's the new version.
+
+172
+00:10:04.240 --> 00:10:08.630
+Click the thumbnail and let's watch.
+
+173
+00:10:21.880 --> 00:10:23.360
+Now, compare that moment.
+
+174
+00:10:23.410 --> 00:10:25.950
+Does the window appear when I wanted it to?
+
+175
+00:10:26.000 --> 00:10:27.630
+That's what I'm checking.
+
+176
+00:10:27.680 --> 00:10:29.190
+The idea is still mine.
+
+177
+00:10:29.240 --> 00:10:34.290
+I gave it feedback in ordinary language and it made another version.
+
+178
+00:10:36.660 --> 00:10:40.250
+That's the loop. Idea prompt result tweak.
+
+179
+00:10:40.300 --> 00:10:43.510
+After a take, choose one important change for the next draft.
+
+180
+00:10:43.560 --> 00:10:44.800
+Stay in the same chat.
+
+181
+00:10:44.850 --> 00:10:47.490
+Pause and watch your video all the way through.
+
+182
+00:10:47.540 --> 00:10:51.130
+Compare the person, place and main action with your idea.
+
+183
+00:10:51.180 --> 00:10:53.270
+Then check the moment you cared about most.
+
+184
+00:10:53.320 --> 00:10:54.870
+Did it happen the way you wanted?
+
+185
+00:10:54.920 --> 00:10:58.750
+If something needs fixing, describe the change in ordinary language.
+
+186
+00:10:58.800 --> 00:11:02.690
+Read the updated prompt, then generate another version if you need it.
+
+187
+00:11:02.740 --> 00:11:06.770
+Keep a take that works, stop after at most two drafts.
+
+188
+00:11:06.820 --> 00:11:10.700
+Save the version you prefer, note anything unfinished and come back.
+
+189
+00:11:10.750 --> 00:11:14.030
+Look at what we started with.
+
+190
+00:11:14.080 --> 00:11:18.510
+One paragraph about my job and three sentences I could have texted to a friend.
+
+191
+00:11:18.560 --> 00:11:22.570
+Now, I have a research shortlist and a draft of that scene.
+
+192
+00:11:22.620 --> 00:11:28.070
+Something I can use and something I wanted to see.
+
+193
+00:11:28.120 --> 00:11:35.370
+Your homework is to use your second brain for one real task and create a 15 second scene from your own idea.
+
+194
+00:11:35.420 --> 00:11:38.570
+If you follow the pauses, you've already started.
+
+195
+00:11:38.620 --> 00:11:40.730
+Now finish and save your work.
+
+196
+00:11:40.780 --> 00:11:46.060
+Keep the useful answer and your chosen video with the idea and prompt that made it.
+
+197
+00:11:46.110 --> 00:11:52.080
+Add two short notes, what you asked for and what you kept or changed and why.
+
+198
+00:11:52.130 --> 00:11:57.650
+Next lesson, you'll learn to create content and ads for any business in minutes.
+
+199
+00:11:57.700 --> 00:12:04.270
+Product photos, social posts, a video ad, all starting with a photo of one ordinary object.
+
+200
+00:12:04.320 --> 00:12:11.080
+So bring one thing you own, a bottle, a mug or a pair of shoes and stay tuned.
+
