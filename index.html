@@ -10,7 +10,7 @@
     font: 13px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   #wrap { display: flex; flex-direction: column; height: 100%; }
   #vid { position: relative; flex: 1 1 auto; min-height: 120px; }
-  #player, #vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  #player, #vid iframe, #vid video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   #bar { flex: 0 0 auto; background: #141414; padding: 4px 6px; display: flex; flex-direction: column; gap: 4px; }
   .row { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; justify-content: center; }
   button { background: #2a2a2a; color: #eee; border: 1px solid #3a3a3a; border-radius: 6px;
@@ -67,8 +67,12 @@
 </div>
 <script>
   // Uso: index.html?v=ID&start=SEG&end=SEG&autoplay=1 (bucle activado por defecto; &loop=0 lo apaga)
+  // v también puede ser un enlace directo a un video (.mp4, .webm…): ?v=https://sitio.com/video.mp4&start=…
   var q = new URLSearchParams(location.search);
-  var v = (q.get("v") || "").replace(/[^A-Za-z0-9_-]/g, "");
+  var rawV = (location.search.match(/[?&]v=(.*?)(?=&(?:start|end|autoplay|loop|nocookie)=|$)/) || [])[1] || "";
+  try { rawV = decodeURIComponent(rawV); } catch (e) {}
+  var FILE = /^https?:\/\//i.test(rawV.trim());
+  var v = FILE ? rawV.trim() : (q.get("v") || "").replace(/[^A-Za-z0-9_-]/g, "");
   var origStart = parseFloat(q.get("start")); if (isNaN(origStart)) origStart = 0;
   var origEnd = parseFloat(q.get("end")); if (isNaN(origEnd) || origEnd <= origStart) origEnd = null;
   var start = origStart, end = origEnd;
@@ -154,6 +158,42 @@
                     autoplay: q.get("autoplay") === "1" ? 1 : 0 },
       events: { onReady: onReady, onStateChange: onStateChange }
     });
+  }
+
+  // ---- Video directo (.mp4): imita las funciones del reproductor de YouTube ----
+  function startFilePlayer() {
+    window.YT = { PlayerState: { ENDED: 0, PLAYING: 1, PAUSED: 2 } };
+    var el = document.createElement("video");
+    el.id = "player";
+    el.controls = true;
+    el.preload = "auto";
+    el.playsInline = true;
+    el.setAttribute("playsinline", "");
+    el.src = v + (v.indexOf("#") < 0 ? "#t=" + start : "");
+    $("player").replaceWith(el);
+    player = {
+      getCurrentTime: function () { return el.currentTime; },
+      seekTo: function (t) { try { el.currentTime = t; } catch (e) {} },
+      playVideo: function () { var p = el.play(); if (p && p.catch) p.catch(function () {}); },
+      pauseVideo: function () { el.pause(); },
+      getPlayerState: function () { return el.ended ? 0 : (el.paused ? 2 : 1); },
+      setPlaybackRate: function (r) { el.playbackRate = r; },
+      mute: function () { el.muted = true; },
+      unMute: function () { el.muted = false; },
+      isMuted: function () { return el.muted; }
+    };
+    el.addEventListener("playing", function () { onStateChange({ data: 1 }); });
+    el.addEventListener("pause", function () { onStateChange({ data: 2 }); });
+    el.addEventListener("ended", function () { onStateChange({ data: 0 }); });
+    el.addEventListener("loadedmetadata", function () {
+      onReady();
+      if (Math.abs(el.currentTime - start) > 0.3) el.currentTime = start;
+      if (q.get("autoplay") === "1") player.playVideo();
+    }, { once: true });
+    el.addEventListener("error", function () {
+      $("vid").innerHTML = '<p class="err">No se pudo cargar el video.<br>Revisa el enlace o tu conexión.</p>';
+    });
+    $("mute").hidden = true;   // sin anuncios: el botón de tapar anuncios no hace falta
   }
 
   // ---- Controles ----
@@ -278,6 +318,8 @@
   load(); show();
   if (!v) {
     $("wrap").innerHTML = '<p class="err">Falta el ID del video (?v=...)</p>';
+  } else if (FILE) {
+    startFilePlayer();
   } else {
     var s = document.createElement("script");
     s.src = "https://www.youtube.com/iframe_api";
