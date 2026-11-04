@@ -1,0 +1,786 @@
+WEBVTT
+
+1
+00:00:03.050 --> 00:00:06.400
+Bienvenido a la primera lección de nuestro curso.
+
+2
+00:00:06.450 --> 00:00:09.400
+Hoy vas a hacer tres videos.
+
+3
+00:00:09.450 --> 00:00:12.400
+Harás el primero antes de que yo explique nada,
+
+4
+00:00:12.450 --> 00:00:14.900
+solo para que veas lo simple que puede ser esto.
+
+5
+00:00:14.950 --> 00:00:17.800
+Para llevarte de una idea en bruto a un video terminado,
+
+6
+00:00:17.850 --> 00:00:22.250
+usaremos tres herramientas, cada una resolviendo una parte distinta del proceso.
+
+7
+00:00:22.350 --> 00:00:23.700
+Primero, Seedance 2.5.
+
+8
+00:00:23.750 --> 00:00:27.400
+Crea algunos de los más realistas videos con IA que existen,
+
+9
+00:00:27.450 --> 00:00:31.000
+imágenes que pueden verse casi indistinguibles de un rodaje real.
+
+10
+00:00:31.050 --> 00:00:36.700
+Los grandes estudios lo usan, y lo que los creadores expertos están haciendo con él es realmente alucinante.
+
+11
+00:00:36.750 --> 00:00:38.600
+Segundo, Supercomputer.
+
+12
+00:00:38.650 --> 00:00:42.600
+Piénsalo como un compañero creativo con el que puedes hablar en lenguaje sencillo.
+
+13
+00:00:42.650 --> 00:00:45.400
+Cuando no estás seguro de cómo expresar una idea,
+
+14
+00:00:45.450 --> 00:00:50.250
+te ayuda a desarrollarla, añadir detalle y darle forma de algo que el modelo pueda entender.
+
+15
+00:00:50.650 --> 00:00:55.700
+Combina conocimiento técnico con criterio creativo, y te ayuda a llevar una idea mucho más lejos.
+
+16
+00:00:55.750 --> 00:01:01.800
+Y por último, un preset listo para usar: te da un video cinematográfico en solo un par de clics.
+
+17
+00:01:01.850 --> 00:01:08.450
+Lo único que tienes que hacer es subir una foto tuya o de tu personaje y hacer clic en generar.
+
+18
+00:01:11.650 --> 00:01:13.000
+Así es como va a funcionar.
+
+19
+00:01:13.050 --> 00:01:15.400
+Yo haré algo, luego diré pausa.
+
+20
+00:01:15.450 --> 00:01:19.250
+Pausarás la lección, abrirás la plataforma y harás exactamente lo que yo acabo de hacer.
+
+21
+00:01:19.650 --> 00:01:24.500
+Luego volverás, y veremos ambos resultados, el mío y el tuyo.
+
+22
+00:01:24.550 --> 00:01:25.400
+Esta parte importa.
+
+23
+00:01:25.450 --> 00:01:28.400
+No veas esta lección como una película desde el sofá.
+
+24
+00:01:28.450 --> 00:01:36.300
+Mi resultado no te enseñará mucho, el tuyo te lo enseñará todo.
+
+25
+00:01:36.350 --> 00:01:38.700
+Y enfrentemos dos miedos de una vez.
+
+26
+00:01:38.750 --> 00:01:41.250
+Sé que los tienes, yo también los tuve.
+
+27
+00:01:41.650 --> 00:01:46.400
+El primero: hay tantas palabras que no entiendo.
+
+28
+00:01:46.450 --> 00:01:49.400
+Cierto. Y te explicaré cada una de ellas.
+
+29
+00:01:49.450 --> 00:01:54.000
+Más importante aún, te mostraré cómo encontrar la respuesta tú mismo cuando yo no esté.
+
+30
+00:01:54.050 --> 00:01:57.150
+El segundo: hay cien modelos.
+
+31
+00:01:57.250 --> 00:01:59.200
+Me voy a confundir.
+
+32
+00:01:59.250 --> 00:02:01.250
+De verdad hay muchos modelos.
+
+33
+00:02:02.150 --> 00:02:05.800
+Pero piensa en ellos como herramientas en un taller.
+
+34
+00:02:05.850 --> 00:02:08.400
+Un martillo no compite con un destornillador.
+
+35
+00:02:08.450 --> 00:02:10.200
+Cada herramienta tiene sus propias fortalezas,
+
+36
+00:02:10.250 --> 00:02:14.900
+y cada vez que usemos una, te diré cuál estamos usando y por qué.
+
+37
+00:02:14.950 --> 00:02:16.300
+No tendrás que adivinar.
+
+38
+00:02:16.350 --> 00:02:21.300
+Dos de los tres videos que hagas hoy probablemente serán peores que el que viste en la intro.
+
+39
+00:02:21.350 --> 00:02:24.300
+Es normal. Es parte del plan.
+
+40
+00:02:24.350 --> 00:02:27.150
+El tercero te llevará allí.
+
+41
+00:02:30.850 --> 00:02:33.600
+Empecemos con la petición más simple posible.
+
+42
+00:02:33.650 --> 00:02:39.000
+¿Qué pasa si le pedimos al modelo que cree una escena de película de ciencia ficción en una sola frase?
+
+43
+00:02:39.050 --> 00:02:42.100
+Sin referencias, sin detalles técnicos.
+
+44
+00:02:42.150 --> 00:02:45.800
+Averigüémoslo. Vamos a Higgsfield.ai.
+
+45
+00:02:45.850 --> 00:02:49.600
+Cuando abras por primera vez el sitio, verás muchas pestañas e información.
+
+46
+00:02:49.650 --> 00:02:54.500
+Puede parecer abrumador al principio, pero no te preocupes, enseguida entenderás qué es qué.
+
+47
+00:02:54.550 --> 00:02:58.350
+Ahora mismo estamos buscando la pestaña Cinema Studio.
+
+48
+00:02:58.450 --> 00:03:03.000
+Por ahora, todo lo que necesitamos es este panel de control, donde escribiremos nuestro primer prompt.
+
+49
+00:03:03.050 --> 00:03:06.450
+Aquí es donde puedes generar tanto imágenes como videos.
+
+50
+00:03:06.550 --> 00:03:12.800
+Cambiemos a la pestaña Video, selecciona el modelo Seedance 2.5 y repasemos rápido los ajustes.
+
+51
+00:03:12.850 --> 00:03:17.300
+Elegiremos una relación de aspecto 21/9 porque se ve más cinematográfico.
+
+52
+00:03:17.350 --> 00:03:21.700
+Luego, para no gastar créditos innecesarios, pondremos la calidad en 720p.
+
+53
+00:03:21.750 --> 00:03:24.300
+Eso basta para obtener un buen resultado.
+
+54
+00:03:24.350 --> 00:03:29.800
+Normalmente usamos 1080p solo cuando tenemos confianza en el prompt y el resultado que va a producir.
+
+55
+00:03:29.850 --> 00:03:32.200
+Luego, pondremos la duración en 15 segundos
+
+56
+00:03:32.250 --> 00:03:36.250
+y nos aseguraremos de que estamos generando solo un video, no cuatro a la vez.
+
+57
+00:03:36.350 --> 00:03:40.000
+Dejaremos el sonido activado y escribiremos nuestro prompt en el cuadro de texto.
+
+58
+00:03:40.050 --> 00:03:44.600
+Crea un video de 15 segundos de una escena épica de ciencia ficción.
+
+59
+00:03:44.650 --> 00:03:49.300
+Antes de empezar la generación, asegúrate de que un video cuesta 98 créditos.
+
+60
+00:03:49.350 --> 00:03:55.400
+Es fácil elegir los ajustes equivocados por error y gastar sin querer más de lo que pensabas.
+
+61
+00:03:55.450 --> 00:03:57.100
+Ahora dale a Generar.
+
+62
+00:03:57.150 --> 00:04:02.200
+La generación suele tardar de 5 a 10 minutos y tu video aparecerá aquí cuando esté listo.
+
+63
+00:04:02.250 --> 00:04:03.250
+Ahora te toca a ti.
+
+64
+00:04:03.550 --> 00:04:10.600
+Pausa la lección, sigue los mismos pasos y o escribe exactamente el mismo prompt o prueba algo parecido.
+
+65
+00:04:10.650 --> 00:04:15.900
+Crea un video de 15 segundos de una escena épica de ciencia ficción. Mantenlo así de simple.
+
+66
+00:04:15.950 --> 00:04:21.100
+Inicia la generación, luego vuelve y hablaremos de lo que acabamos de hacer.
+
+67
+00:04:21.150 --> 00:04:24.100
+Mira lo simple que es ese prompt.
+
+68
+00:04:24.150 --> 00:04:29.000
+No especifiqué el personaje principal, el mundo, el lugar ni el movimiento de cámara.
+
+69
+00:04:29.050 --> 00:04:31.250
+Solo le di un formato y un ambiente.
+
+70
+00:04:31.850 --> 00:04:34.400
+Esto es lo que llamo un prompt perezoso.
+
+71
+00:04:34.450 --> 00:04:39.200
+Te pone en marcha sin obligarte a escribir el brief creativo perfecto al primer intento.
+
+72
+00:04:39.250 --> 00:04:40.700
+Pero hay una trampa.
+
+73
+00:04:40.750 --> 00:04:44.400
+Todo lo que dejes fuera, el modelo lo decide por ti.
+
+74
+00:04:44.450 --> 00:04:46.200
+A veces te sorprenderá,
+
+75
+00:04:46.250 --> 00:04:51.250
+otras veces creará algo hermoso que no tiene nada que ver con lo que imaginaste.
+
+76
+00:04:51.650 --> 00:04:55.400
+Precisamente por eso empezamos con esta única frase corta.
+
+77
+00:04:55.450 --> 00:04:57.800
+Primero, veremos qué hace el modelo por su cuenta,
+
+78
+00:04:57.850 --> 00:05:02.200
+luego tomaremos la misma idea y aprenderemos a dirigir el resultado.
+
+79
+00:05:02.250 --> 00:05:05.100
+Estás esperando tu generación, y yo también.
+
+80
+00:05:05.150 --> 00:05:10.700
+Nunca nos quedamos solo esperando, así que hablemos de créditos y de cómo no desperdiciarlos.
+
+81
+00:05:10.750 --> 00:05:17.600
+Antes de generar, siempre puedes ver exactamente cuántos créditos va a costar.
+
+82
+00:05:17.650 --> 00:05:22.850
+Aquí está tu saldo restante, y si necesitas más, puedes conseguirlos aquí.
+
+83
+00:05:23.850 --> 00:05:26.900
+Está todo en una sola pantalla. Sin sorpresas.
+
+84
+00:05:26.950 --> 00:05:28.600
+Puedes revisar los detalles por tu cuenta.
+
+85
+00:05:28.650 --> 00:05:31.250
+El enlace está en la descripción.
+
+86
+00:05:31.950 --> 00:05:34.100
+Y quiero ser sincero sobre una cosa.
+
+87
+00:05:34.150 --> 00:05:37.900
+Un intento fallido igual gasta créditos.
+
+88
+00:05:37.950 --> 00:05:42.100
+Estás pagando por la generación, no por si te gusta el resultado.
+
+89
+00:05:42.150 --> 00:05:44.200
+Piénsalo como un rodaje real.
+
+90
+00:05:44.250 --> 00:05:47.800
+Una vez que grabas una toma, el tiempo y los recursos ya se gastaron,
+
+91
+00:05:47.850 --> 00:05:50.600
+aunque esa toma nunca llegue al montaje final.
+
+92
+00:05:50.650 --> 00:05:53.250
+Mi generación está lista. Veámosla.
+
+93
+00:06:09.150 --> 00:06:11.000
+Esa explosión se ve bastante bien.
+
+94
+00:06:11.050 --> 00:06:15.100
+Y la navecita pasando volando junto a esta cosa enorme te da una verdadera sensación de escala.
+
+95
+00:06:15.150 --> 00:06:18.100
+Pero sigue el láser un segundo.
+
+96
+00:06:18.150 --> 00:06:21.100
+En una toma, parece que la nave grande está atacando.
+
+97
+00:06:21.150 --> 00:06:24.250
+En la siguiente, no sé distinguir de dónde viene el rayo.
+
+98
+00:06:24.750 --> 00:06:26.500
+Luego todo explota.
+
+99
+00:06:26.550 --> 00:06:29.700
+Quería ver a una nave ser más astuta que la otra.
+
+100
+00:06:29.750 --> 00:06:32.600
+En cambio, estoy tratando de entender qué acaba de pasar.
+
+101
+00:06:32.650 --> 00:06:34.000
+Y no me malinterpretes.
+
+102
+00:06:34.050 --> 00:06:37.100
+Para una frase que tomó unos segundos escribir,
+
+103
+00:06:37.150 --> 00:06:42.100
+esto sinceramente no está mal, pero no es la escena que yo quería.
+
+104
+00:06:42.150 --> 00:06:44.100
+¿Recuerdas esa sensación?
+
+105
+00:06:44.150 --> 00:06:45.800
+No, no es eso.
+
+106
+00:06:45.850 --> 00:06:50.250
+En un momento, se va a convertir en la herramienta más útil de esta lección.
+
+107
+00:06:50.450 --> 00:06:54.800
+Tu primer video ya debería estar listo, y merece verse completo.
+
+108
+00:06:54.850 --> 00:06:59.950
+Ve a verlo antes de seguir. Te espero.
+
+109
+00:07:02.250 --> 00:07:07.100
+Ahora, la misma idea, solo que esta vez usamos supercomputer.
+
+110
+00:07:07.150 --> 00:07:10.250
+De vuelta en Higgsfield, haz clic en supercomputer en el menú de arriba.
+
+111
+00:07:10.350 --> 00:07:14.000
+Esto es supercomputer, no un chatbot cualquiera.
+
+112
+00:07:14.050 --> 00:07:16.900
+Sabe cómo funciona Seedance ahora mismo,
+
+113
+00:07:16.950 --> 00:07:22.900
+y todo su trabajo es convertir la idea que tienes en la cabeza en un lenguaje que el modelo entienda.
+
+114
+00:07:22.950 --> 00:07:28.700
+Piénsalo como alguien a tu lado que ha hecho 10.000 videos y nunca se cansa.
+
+115
+00:07:28.750 --> 00:07:34.700
+Ahora escribo: Crea un video de 15 segundos de una escena épica de ciencia ficción y lo envío.
+
+116
+00:07:34.750 --> 00:07:39.600
+A veces, supercomputer hace una o dos preguntas primero.
+
+117
+00:07:39.650 --> 00:07:41.400
+Responde en lenguaje sencillo.
+
+118
+00:07:41.450 --> 00:07:44.600
+¿Qué tipo de batalla? ¿Qué época? ¿Qué ambiente?
+
+119
+00:07:44.650 --> 00:07:49.750
+Me salto la espera. Veamos.
+
+120
+00:08:02.150 --> 00:08:06.300
+Bien, vemos al piloto, luego la nave pequeña lanza un misil,
+
+121
+00:08:06.350 --> 00:08:09.400
+y mira dónde impacta a la nave más grande.
+
+122
+00:08:09.450 --> 00:08:13.000
+No son solo naves y explosiones, hay una progresión.
+
+123
+00:08:13.050 --> 00:08:17.800
+La amenaza, el piloto, el contraataque, y luego el desenlace.
+
+124
+00:08:17.850 --> 00:08:20.000
+Pedí una batalla espacial épica.
+
+125
+00:08:20.050 --> 00:08:22.200
+Descubrió cómo mostrar una.
+
+126
+00:08:22.250 --> 00:08:27.900
+Ahora te toca a ti. Ahora, comparemos los resultados.
+
+127
+00:08:27.950 --> 00:08:30.200
+A la izquierda, mi prompt de una línea.
+
+128
+00:08:30.250 --> 00:08:33.500
+A la derecha, la misma idea a través de supercomputer.
+
+129
+00:08:33.550 --> 00:08:37.300
+La de la izquierda se ve cinematográfica, pero la dirección del láser es confusa.
+
+130
+00:08:37.350 --> 00:08:41.200
+La nave grande explota, y no estoy seguro de quién disparó.
+
+131
+00:08:41.250 --> 00:08:46.900
+A la derecha, vemos al piloto, un lanzamiento de misil y el impacto que lleva a la explosión.
+
+132
+00:08:46.950 --> 00:08:49.400
+La acción es más fácil de seguir.
+
+133
+00:08:49.450 --> 00:08:51.250
+Esa es toda la lección en un solo cuadro.
+
+134
+00:08:51.750 --> 00:08:55.900
+No es talento, no son años de experiencia: es un prompt más claro.
+
+135
+00:08:55.950 --> 00:08:57.400
+Una cosa importante más.
+
+136
+00:08:57.450 --> 00:09:01.900
+A veces, una generación empieza, pero no produce un video terminado.
+
+137
+00:09:01.950 --> 00:09:05.100
+Podrías ver "fallido" o "no apto para el trabajo".
+
+138
+00:09:05.150 --> 00:09:08.600
+Puede ser un problema técnico o un filtro de seguridad.
+
+139
+00:09:08.650 --> 00:09:13.250
+También hay una revisión de propiedad intelectual, que busca personajes y franquicias protegidos.
+
+140
+00:09:14.150 --> 00:09:17.300
+Tu prompt o el propio video pueden activar un bloqueo,
+
+141
+00:09:17.350 --> 00:09:20.900
+aunque nunca hayas pedido un personaje famoso.
+
+142
+00:09:20.950 --> 00:09:25.300
+Los créditos siempre se devuelven automáticamente en los intentos fallidos o bloqueados.
+
+143
+00:09:25.350 --> 00:09:28.000
+El mismo prompt te puede dar un video distinto.
+
+144
+00:09:28.050 --> 00:09:33.100
+No estás pidiendo una pizza, estás lanzando un dado, solo que puedes diseñar las caras.
+
+145
+00:09:33.150 --> 00:09:37.300
+Cuanto mejor sea el prompt, más caras te dejarán contento.
+
+146
+00:09:37.350 --> 00:09:43.600
+En este curso, te enseñaremos a reducir esa aleatoriedad y obtener resultados más consistentes.
+
+147
+00:09:43.650 --> 00:09:50.600
+Antes, hicimos nuestra generación de prueba en 720p para ahorrar créditos en vez de ir directo a 1080p.
+
+148
+00:09:50.650 --> 00:09:53.300
+Pero cuando intento que una escena concreta salga bien,
+
+149
+00:09:53.350 --> 00:09:56.300
+o quiero probar una idea con varias versiones distintas,
+
+150
+00:09:56.350 --> 00:09:59.400
+hay un truco sencillo para ahorrar aún más créditos.
+
+151
+00:09:59.450 --> 00:10:02.550
+Se llama "Seedance 2.5 Draft".
+
+152
+00:10:02.650 --> 00:10:07.600
+Así que selecciono "Seedance 2.5 Draft" y lo dejo en 480p.
+
+153
+00:10:07.650 --> 00:10:15.500
+Estoy usando el mismo prompt de ciencia ficción, pero esta vez generaré cuatro versiones en un solo lote.
+
+154
+00:10:15.550 --> 00:10:22.550
+Cada borrador de 15 segundos cuesta 45 créditos, así que los cuatro cuestan 180.
+
+155
+00:10:24.350 --> 00:10:30.100
+Puedo comparar los resultados y elegir el de la acción y el movimiento de cámara que más me gusten.
+
+156
+00:10:30.150 --> 00:10:35.300
+Si ninguno funciona, puedo ajustar el prompt y probar otro lote.
+
+157
+00:10:35.350 --> 00:10:39.400
+Cuando consigo una toma que quiero conservar, hago clic en "Generar" en 1080p.
+
+158
+00:10:39.450 --> 00:10:46.250
+Eso cuesta otros 180 créditos y me da un resultado idéntico en mayor resolución.
+
+159
+00:10:46.750 --> 00:10:51.700
+Generar los cuatro directamente en 1080p costaría 720 créditos.
+
+160
+00:10:51.750 --> 00:10:57.700
+Cuatro borradores, luego llevar solo mi favorito a 1080p, cuesta 360.
+
+161
+00:10:57.750 --> 00:11:00.600
+Es la mitad.
+
+162
+00:11:00.650 --> 00:11:01.800
+Prueba la idea primero.
+
+163
+00:11:01.850 --> 00:11:06.650
+Gasta en calidad final una vez que hayas encontrado la toma que quieres.
+
+164
+00:11:10.050 --> 00:11:12.500
+¿Recuerdas cuando dije que harías tres videos hoy?
+
+165
+00:11:12.550 --> 00:11:14.500
+¿Ya hiciste los dos primeros?
+
+166
+00:11:14.550 --> 00:11:18.300
+Ahora, hagamos el tercero, el que viste al principio.
+
+167
+00:11:18.350 --> 00:11:21.200
+Esta vez no voy a escribir nada.
+
+168
+00:11:21.250 --> 00:11:22.400
+Ni una sola palabra.
+
+169
+00:11:22.450 --> 00:11:24.300
+Esto es un preset listo para usar.
+
+170
+00:11:24.350 --> 00:11:26.400
+Otra persona ya hizo la parte difícil,
+
+171
+00:11:26.450 --> 00:11:30.400
+desarrolló la escena, eligió el movimiento de cámara, la iluminación y el sonido,
+
+172
+00:11:30.450 --> 00:11:33.600
+probó decenas de versiones y se quedó con la mejor.
+
+173
+00:11:33.650 --> 00:11:39.100
+Luego lo empaquetaron, así que solo tienes que cambiar una cosa: el personaje principal.
+
+174
+00:11:39.150 --> 00:11:41.300
+Lo único que necesitas es una imagen.
+
+175
+00:11:41.350 --> 00:11:45.700
+Puede ser una foto tuya o de un amigo, mira los clics y sigue los pasos.
+
+176
+00:11:45.750 --> 00:11:48.800
+Abro el preset, subo la imagen aquí,
+
+177
+00:11:48.850 --> 00:11:53.850
+compruebo que la cara se vea con claridad y luego hago clic en "Generar".
+
+178
+00:12:08.850 --> 00:12:11.200
+Tómate un segundo y piensa en eso.
+
+179
+00:12:11.250 --> 00:12:14.300
+Hace diez minutos, no sabías qué era un prompt.
+
+180
+00:12:14.350 --> 00:12:19.400
+Ahora tienes un video cinematográfico contigo o con tu personaje como protagonista.
+
+181
+00:12:19.450 --> 00:12:25.150
+Pausa aquí, elige cualquier imagen y usa este preset.
+
+182
+00:12:27.250 --> 00:12:30.600
+Sencillo. Todo lo que hice hoy, tú lo haces con tus propias manos.
+
+183
+00:12:30.650 --> 00:12:38.500
+Tres videos: el prompt perezoso, el mismo prompt a través de supercomputer y el preset con tu propia imagen.
+
+184
+00:12:38.550 --> 00:12:41.600
+Sube tu tarea en la ventana de abajo, y listo.
+
+185
+00:12:41.650 --> 00:12:43.300
+Una cosa más antes de que te vayas.
+
+186
+00:12:43.350 --> 00:12:47.800
+Lo que acabas de hacer en diez minutos antes requería un equipo y un presupuesto.
+
+187
+00:12:47.850 --> 00:12:51.250
+No porque seas un genio: la herramienta cambió.
+
+188
+00:12:51.550 --> 00:12:54.800
+Cuando una herramienta cambia tanto, se abre una ventana corta.
+
+189
+00:12:54.850 --> 00:12:58.400
+Muchas menos personas saben usarla de las que la necesitan.
+
+190
+00:12:58.450 --> 00:12:59.900
+Estamos dentro de esa ventana.
+
+191
+00:12:59.950 --> 00:13:00.900
+¿Quieres profundizar?
+
+192
+00:13:00.950 --> 00:13:05.500
+Encontrarás un PDF abajo con más sobre Seedance y supercomputer.
+
+193
+00:13:05.550 --> 00:13:09.000
+En la próxima lección, vas a tener un segundo cerebro.
+
+194
+00:13:09.050 --> 00:13:10.500
+No es una metáfora.
+
+195
+00:13:10.550 --> 00:13:15.400
+Es una herramienta real que cambiará por completo cómo trabajas con la plataforma.
+
+196
+00:13:15.450 --> 00:13:16.250
+Ya verás.
+
