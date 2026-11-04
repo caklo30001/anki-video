@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ver lección</title>
+<style>
+  html, body { margin: 0; background: #000; color: #ddd;
+    font: 14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  video { display: block; width: 100%; max-height: 85vh; background: #000; }
+  video::cue { font-size: 1.05em; background: rgba(0,0,0,.75); }
+  #bar { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 8px; background: #141414; }
+  button { background: #2a2a2a; color: #eee; border: 1px solid #3a3a3a; border-radius: 6px;
+    padding: 6px 10px; font: inherit; cursor: pointer; }
+  button.on { background: #3b5ba5; border-color: #4d6fc0; }
+  .sep { width: 12px; }
+  p.err { text-align: center; padding: 2em 1em; }
+</style>
+</head>
+<body>
+<video id="v" controls playsinline preload="metadata"></video>
+<div id="bar">
+  <button data-s="ambos">Inglés + Español</button>
+  <button data-s="en">Inglés</button>
+  <button data-s="es">Español</button>
+  <button data-s="off">Sin subtítulos</button>
+  <span class="sep"></span>
+  <button id="back">−5 s</button>
+  <button data-r="0.75">0.75×</button>
+  <button data-r="1">1×</button>
+</div>
+<script>
+  // Uso: ver.html?subs=leccion1&v=https://…/video.mp4
+  var q = new URLSearchParams(location.search);
+  var src = (location.search.match(/[?&]v=(.*?)(?=&(?:subs|t)=|$)/) || [])[1] || "";
+  try { src = decodeURIComponent(src); } catch (e) {}
+  var subs = q.get("subs") || "leccion1";
+  var v = document.getElementById("v");
+  if (!src) document.body.innerHTML = '<p class="err">Falta el enlace del video (?v=...)</p>';
+  v.src = src + (q.get("t") ? "#t=" + q.get("t") : "");
+  ["ambos", "en", "es"].forEach(function (k) {
+    var t = document.createElement("track");
+    t.kind = "subtitles"; t.label = k; t.srclang = k === "es" ? "es" : "en";
+    t.src = subs + "." + k + ".vtt";
+    v.appendChild(t);
+  });
+  var mode = "ambos";
+  try { mode = localStorage.getItem("subsMode") || mode; } catch (e) {}
+  function setSubs(m) {
+    mode = m;
+    try { localStorage.setItem("subsMode", m); } catch (e) {}
+    for (var i = 0; i < v.textTracks.length; i++) {
+      v.textTracks[i].mode = v.textTracks[i].label === m ? "showing" : "disabled";
+    }
+    mark();
+  }
+  function mark() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-s]"), function (b) {
+      b.classList.toggle("on", b.getAttribute("data-s") === mode);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-r]"), function (b) {
+      b.classList.toggle("on", +b.getAttribute("data-r") === v.playbackRate);
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-s]"), function (b) {
+    b.onclick = function () { setSubs(b.getAttribute("data-s")); };
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-r]"), function (b) {
+    b.onclick = function () { v.playbackRate = +b.getAttribute("data-r"); mark(); };
+  });
+  document.getElementById("back").onclick = function () { v.currentTime = Math.max(0, v.currentTime - 5); };
+  v.addEventListener("loadedmetadata", function () { setSubs(mode); });
+  setTimeout(function () { setSubs(mode); }, 300);
+</script>
+</body>
+</html>
