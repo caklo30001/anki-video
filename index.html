@@ -315,7 +315,22 @@
     else if (e.key === "m" || e.key === "M") toggleMute();
   });
 
+  // Avisa a la tarjeta de Anki en qué segundo va el video (para mostrar chunks sincronizados)
+  setInterval(function () {
+    if (!ok() || window.parent === window) return;
+    try {
+      window.parent.postMessage({ type: "ld-time", t: now(),
+        playing: player.getPlayerState() === YT.PlayerState.PLAYING }, "*");
+    } catch (e) {}
+  }, 200);
+
   load(); show();
+  // Avisa a la tarjeta de Anki en qué segundo va el video (para mostrar chunks sincronizados)
+  setInterval(function () {
+    if (ok() && window.parent !== window) {
+      try { window.parent.postMessage({ type: "ld-time", t: now() }, "*"); } catch (e) {}
+    }
+  }, 200);
   if (!v) {
     $("wrap").innerHTML = '<p class="err">Falta el ID del video (?v=...)</p>';
   } else if (FILE) {
