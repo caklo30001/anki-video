@@ -27,10 +27,13 @@
   #cover { position: absolute; inset: 0; background: #000; z-index: 5; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 10px; color: #fff; text-align: center; }
   /* Esquina inferior derecha libre: ahí sale el botón "Saltar anuncio" de YouTube */
-  #cover { --nw: 150px; --nh: 72px;
+  #cover, #veil { --nw: 100px; --nh: 72px;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--nh)), calc(100% - var(--nw)) calc(100% - var(--nh)),
                        calc(100% - var(--nw)) 100%, 0 100%);
-    padding-right: var(--nw); box-sizing: border-box; }
+    box-sizing: border-box; }
+  #cover { padding-right: var(--nw); }
+  #veil { position: absolute; inset: 0; background: #1f2937; z-index: 4; pointer-events: none;
+    display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 15px; padding-right: var(--nw); }
   #cover b { font-size: 48px; font-variant-numeric: tabular-nums; line-height: 1; }
   #cover span { font-size: 14px; color: #bbb; }
   [hidden] { display: none !important; }
@@ -39,6 +42,7 @@
 <body>
 <div id="wrap">
   <div id="vid"><div id="player"></div>
+    <div id="veil" hidden>🎧 Solo audio</div>
     <div id="cover" hidden><span>🔇 Silenciado mientras pasan los anuncios</span><b id="coverN">10</b>
       <button type="button" id="coverX">Mostrar ahora</button></div>
   </div>
@@ -52,6 +56,7 @@
       <button id="loop" title="Repetir en bucle (B)">∞ Bucle</button>
       <button id="wait" title="Espera antes de repetir el bucle (W)">⏱ 0.7 s</button>
       <button id="mute" title="Silenciar 10 s y tapar los anuncios (M)">🔊 Sonido</button>
+      <button id="veilBtn" title="Tapar la imagen del video y dejar solo el audio (V)">🙈 Tapar</button>
       <button id="toggleAdj" title="Corregir inicio y fin">Ajustar</button>
     </div>
     <div class="row" id="adj" hidden>
@@ -273,6 +278,22 @@
     end = x; save(); show();
   }
 
+  // Tapar video: oculta la imagen, deja el audio y los controles (se recuerda en este dispositivo)
+  var veil = false;
+  try { veil = localStorage.getItem("veil") === "1"; } catch (e) {}
+  function showVeil() {
+    $("veil").hidden = !veil;
+    $("veilBtn").textContent = veil ? "👁 Mostrar" : "🙈 Tapar";
+    $("veilBtn").classList.toggle("on", veil);
+  }
+  function toggleVeil() {
+    veil = !veil;
+    try { localStorage.setItem("veil", veil ? "1" : "0"); } catch (e) {}
+    showVeil();
+  }
+  $("veilBtn").onclick = toggleVeil;
+  showVeil();
+
   $("rep").onclick = repeat;
   $("back").onclick = function () { jump(-1); };
   $("fwd").onclick = function () { jump(1); };
@@ -318,6 +339,7 @@
     else if (e.key === "b" || e.key === "B") toggleLoop();
     else if (e.key === "w" || e.key === "W") nextWait();
     else if (e.key === "m" || e.key === "M") toggleMute();
+    else if (e.key === "v" || e.key === "V") toggleVeil();
   });
 
   // Avisa a la tarjeta de Anki en qué segundo va el video (para mostrar chunks sincronizados)
