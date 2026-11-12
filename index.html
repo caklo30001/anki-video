@@ -33,7 +33,9 @@
     box-sizing: border-box; }
   #cover { padding-right: var(--nw); }
   #veil { position: absolute; inset: 0; background: #1f2937; z-index: 4; pointer-events: none;
-    display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 15px; padding-right: var(--nw); }
+    display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 15px; padding: 4px var(--nw) 4px 4px;
+    background-repeat: no-repeat; background-position: center; background-size: contain; background-origin: content-box; }
+  #veil.img { background-color: #111; font-size: 0; }
   #cover b { font-size: 48px; font-variant-numeric: tabular-nums; line-height: 1; }
   #cover span { font-size: 14px; color: #bbb; }
   [hidden] { display: none !important; }
@@ -292,6 +294,14 @@
     showVeil();
   }
   $("veilBtn").onclick = toggleVeil;
+  // La tarjeta de Anki puede mandar su imagen para usarla como tapa del video
+  window.addEventListener("message", function (e) {
+    var d = e.data;
+    if (d && d.type === "ld-veil-img" && typeof d.src === "string" && /^data:image\//.test(d.src)) {
+      $("veil").style.backgroundImage = 'url("' + d.src.replace(/"/g, "%22") + '")';
+      $("veil").classList.add("img");
+    }
+  });
   showVeil();
 
   $("rep").onclick = repeat;
