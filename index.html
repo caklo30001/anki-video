@@ -31,13 +31,17 @@
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--nh)), calc(100% - var(--nw)) calc(100% - var(--nh)),
                        calc(100% - var(--nw)) 100%, 0 100%);
     box-sizing: border-box; }
-  #cover { padding-right: var(--nw); }
+  /* Capas: video < tapa negra (silencio) < imagen (Tapar) < contador */
+  #veil { z-index: 6 !important; }
+  #coverBox { position: absolute; top: 6px; right: 6px; z-index: 7; display: flex; flex-direction: column;
+    align-items: center; gap: 3px; background: rgba(0,0,0,.72); color: #fff; border-radius: 10px; padding: 5px 8px; }
+  #coverBox span { font-size: 11px; color: #ccc; }
+  #coverBox b { font-size: 24px; font-variant-numeric: tabular-nums; line-height: 1; }
+  #coverBox button { font-size: 11px; padding: 2px 6px; }
   #veil { position: absolute; inset: 0; background: #1f2937; z-index: 4; pointer-events: none;
     display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 15px; padding: 4px var(--nw) 4px 4px;
     background-repeat: no-repeat; background-position: center; background-size: contain; background-origin: content-box; }
   #veil.img { background-color: #111; font-size: 0; }
-  #cover b { font-size: 48px; font-variant-numeric: tabular-nums; line-height: 1; }
-  #cover span { font-size: 14px; color: #bbb; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -45,7 +49,8 @@
 <div id="wrap">
   <div id="vid"><div id="player"></div>
     <div id="veil" hidden>🎧 Solo audio</div>
-    <div id="cover" hidden><span>🔇 Silenciado mientras pasan los anuncios</span><b id="coverN">10</b>
+    <div id="cover" hidden></div>
+    <div id="coverBox" hidden><span>🔇 Anuncios</span><b id="coverN">10</b>
       <button type="button" id="coverX">Mostrar ahora</button></div>
   </div>
   <div id="bar">
@@ -230,7 +235,7 @@
     player.mute();
     var left = COVER_SECS;
     $("coverN").textContent = left;
-    $("cover").hidden = false;
+    $("cover").hidden = false; $("coverBox").hidden = false;
     clearInterval(coverT);
     coverT = setInterval(function () {
       left--;
@@ -241,7 +246,7 @@
   }
   function endCover() {
     clearInterval(coverT);
-    $("cover").hidden = true;
+    $("cover").hidden = true; $("coverBox").hidden = true;
     if (ok()) player.unMute();
     setTimeout(showMute, 150);
   }
