@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puente rectificador trifásico</title>
+<meta name="description" content="Animación interactiva de cómo circula la corriente en un puente rectificador trifásico de seis diodos.">
+<style>
+:root{--bg:#ffffff;--text:#1f1e1d;--muted:#6b6a65;--line:#8a8983;--card:#f3f2ee;--border:#d9d7cf;--fill:#ffffff;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1c1c1b;--text:#ecebe6;--muted:#a8a69f;--line:#a8a69f;--card:#2a2a28;--border:#3d3d3a;--fill:#262624;}}
+:root[data-theme="dark"]{--bg:#1c1c1b;--text:#ecebe6;--muted:#a8a69f;--line:#a8a69f;--card:#2a2a28;--border:#3d3d3a;--fill:#262624;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+main{max-width:860px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:24px;font-weight:600;margin:0 0 6px}
+p.lead{color:var(--muted);margin:0 0 18px;font-size:15px}
+.controls{display:flex;align-items:center;gap:12px;margin:0 0 6px}
+button{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:8px;height:36px;min-width:44px;font-size:16px;cursor:pointer}
+button:hover{background:var(--card)}
+input[type=range]{flex:1;accent-color:#EF9F27}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:10px 0 18px}
+.mc{background:var(--card);border-radius:8px;padding:10px 12px}
+.ml{font-size:12px;color:var(--muted);margin:0 0 2px}
+.mv{font-size:16px;font-weight:600;margin:0}
+.notes{font-size:14px;color:var(--muted)}
+.notes li{margin:0 0 4px}
+footer{font-size:12px;color:var(--muted);margin-top:20px}
+svg text{font-family:inherit}
+</style>
+</head>
+<body>
+<main>
+  <h1>Puente rectificador trifásico de seis diodos</h1>
+  <p class="lead">Cómo circula la corriente en cada instante del ciclo y por qué las tres fases se compensan.</p>
+  <div class="controls">
+    <button id="play" aria-label="Reproducir">&#9654;</button>
+    <label for="ang" style="font-size:14px;color:var(--muted)">Ángulo</label>
+    <input type="range" id="ang" min="0" max="359" step="1" value="60">
+    <span id="angv" style="font-size:14px;font-weight:600;min-width:44px;text-align:right">60°</span>
+  </div>
+  <svg width="100%" viewBox="0 0 680 500" role="img" aria-labelledby="st sd">
+    <title id="st">Fases y puente rectificador</title>
+    <desc id="sd">Arriba, tres senoidales desfasadas 120 grados con un cursor; abajo, el puente de seis diodos con el camino de la corriente resaltado.</desc>
+    <line x1="60" y1="110" x2="620" y2="110" stroke="var(--border)" stroke-width="1"/>
+    <path id="wA" fill="none" stroke="#378ADD" stroke-width="2"/>
+    <path id="wB" fill="none" stroke="#D85A30" stroke-width="2"/>
+    <path id="wC" fill="none" stroke="#639922" stroke-width="2"/>
+    <line id="cur" y1="40" y2="180" stroke="var(--text)" stroke-width="1" stroke-dasharray="3 3"/>
+    <circle id="dmax" r="6" fill="#EF9F27"/>
+    <circle id="dmin" r="6" fill="none" stroke="#EF9F27" stroke-width="2.5"/>
+    <text x="60" y="30" font-size="12" fill="var(--muted)">Voltajes de fase (0° a 360°)</text>
+    <text x="440" y="30" font-size="12" fill="var(--muted)">Punto lleno: fase más alta</text>
+    <text x="440" y="196" font-size="12" fill="var(--muted)">Punto vacío: fase más baja</text>
+    <g stroke="var(--line)" stroke-width="1.2" fill="none">
+      <line x1="260" y1="230" x2="580" y2="230"/><line x1="260" y1="470" x2="580" y2="470"/>
+      <line x1="580" y1="230" x2="580" y2="320"/><line x1="580" y1="380" x2="580" y2="470"/>
+      <line x1="260" y1="230" x2="260" y2="270"/><line x1="260" y1="290" x2="260" y2="420"/><line x1="260" y1="440" x2="260" y2="470"/>
+      <line x1="360" y1="230" x2="360" y2="270"/><line x1="360" y1="290" x2="360" y2="420"/><line x1="360" y1="440" x2="360" y2="470"/>
+      <line x1="460" y1="230" x2="460" y2="270"/><line x1="460" y1="290" x2="460" y2="420"/><line x1="460" y1="440" x2="460" y2="470"/>
+      <line x1="110" y1="330" x2="260" y2="330" stroke="#378ADD"/>
+      <line x1="110" y1="350" x2="360" y2="350" stroke="#D85A30"/>
+      <line x1="110" y1="370" x2="460" y2="370" stroke="#639922"/>
+    </g>
+    <circle cx="260" cy="330" r="3" fill="var(--line)"/><circle cx="360" cy="350" r="3" fill="var(--line)"/><circle cx="460" cy="370" r="3" fill="var(--line)"/>
+    <rect x="566" y="320" width="28" height="60" rx="4" fill="var(--fill)" stroke="var(--line)" stroke-width="1.2"/>
+    <text x="604" y="354" font-size="12" fill="var(--muted)">Carga</text>
+    <text x="80" y="334" font-size="14" font-weight="600" fill="#378ADD">A</text>
+    <text x="80" y="354" font-size="14" font-weight="600" fill="#D85A30">B</text>
+    <text x="80" y="374" font-size="14" font-weight="600" fill="#639922">C</text>
+    <text x="270" y="224" font-size="12" fill="var(--muted)">Nodo +</text>
+    <text x="270" y="490" font-size="12" fill="var(--muted)">Nodo −</text>
+    <path id="cpath" fill="none" stroke="#EF9F27" stroke-width="3.5" stroke-linejoin="round" stroke-dasharray="8 4" opacity="0.9"/>
+    <g id="diodes"></g>
+  </svg>
+  <div class="grid">
+    <div class="mc"><p class="ml">Conducen</p><p class="mv" id="rd">—</p></div>
+    <div class="mc"><p class="ml">Voltaje en la carga</p><p class="mv" id="rv">—</p></div>
+    <div class="mc"><p class="ml">Corrientes iA · iB · iC</p><p class="mv" id="ri">—</p></div>
+    <div class="mc"><p class="ml">Suma de corrientes</p><p class="mv" id="rs">—</p></div>
+  </div>
+  <ul class="notes">
+    <li>En cada instante conducen dos diodos: el de arriba de la fase más alta y el de abajo de la fase más baja.</li>
+    <li>La corriente sale por una línea y regresa por otra; la tercera fase bloquea (tiene voltaje, pero no corriente).</li>
+    <li>El par cambia cada 60°: seis combinaciones por ciclo, de ahí los seis pulsos de la salida.</li>
+    <li>En todo instante iA + iB + iC = 0, por eso el puente no necesita neutro.</li>
+  </ul>
+  <footer>Fuente de 110 V de fase (190.5 V de línea), 60 Hz, carga resistiva de 100 Ω. Edward Javier Camargo Gómez · Ingeniería Mecatrónica, Universidad ECCI.</footer>
+</main>
+<script>
+const Vm=155.6,R=100,X0=60,X1=620,YC=110,AMP=60;
+const ph={A:{s:0,x:260,y:330,top:'D1',bot:'D4'},B:{s:-120,x:360,y:350,top:'D3',bot:'D6'},C:{s:-240,x:460,y:370,top:'D5',bot:'D2'}};
+const xOf=d=>X0+(X1-X0)*d/360,v=(d,s)=>Vm*Math.sin((d+s)*Math.PI/180),yOf=val=>YC-AMP*val/Vm;
+for(const k in ph){let p='';for(let d=0;d<=360;d+=2){p+=(d?'L':'M')+xOf(d).toFixed(1)+' '+yOf(v(d,ph[k].s)).toFixed(1)+' ';}document.getElementById('w'+k).setAttribute('d',p);}
+let s='';for(const k in ph){const x=ph[k].x;
+s+=`<polygon id="t${k}" points="${x-10},290 ${x+10},290 ${x},272" stroke="var(--line)" stroke-width="1.2"/><line x1="${x-10}" y1="270" x2="${x+10}" y2="270" stroke="var(--line)" stroke-width="1.8"/><text x="${x+14}" y="284" font-size="12" fill="var(--muted)">${ph[k].top}</text>`;
+s+=`<polygon id="b${k}" points="${x-10},440 ${x+10},440 ${x},422" stroke="var(--line)" stroke-width="1.2"/><line x1="${x-10}" y1="420" x2="${x+10}" y2="420" stroke="var(--line)" stroke-width="1.8"/><text x="${x+14}" y="434" font-size="12" fill="var(--muted)">${ph[k].bot}</text>`;}
+document.getElementById('diodes').innerHTML=s;
+const ang=document.getElementById('ang'),cp=document.getElementById('cpath');
+let dash=0;
+function upd(d){
+ d=Math.round(d)%360;ang.value=d;document.getElementById('angv').textContent=d+'°';
+ const vals={};for(const k in ph)vals[k]=v(d,ph[k].s);
+ const ks=Object.keys(vals).sort((a,b)=>vals[b]-vals[a]),mx=ks[0],mn=ks[2],md=ks[1];
+ const cx=xOf(d),c=document.getElementById('cur');c.setAttribute('x1',cx);c.setAttribute('x2',cx);
+ const a=document.getElementById('dmax');a.setAttribute('cx',cx);a.setAttribute('cy',yOf(vals[mx]));
+ const b=document.getElementById('dmin');b.setAttribute('cx',cx);b.setAttribute('cy',yOf(vals[mn]));
+ for(const k in ph){document.getElementById('t'+k).setAttribute('fill',k===mx?'#EF9F27':'var(--fill)');document.getElementById('b'+k).setAttribute('fill',k===mn?'#EF9F27':'var(--fill)');}
+ const P=ph[mx],Q=ph[mn];
+ cp.setAttribute('d',`M110 ${P.y} L${P.x} ${P.y} L${P.x} 230 L580 230 L580 470 L${Q.x} 470 L${Q.x} ${Q.y} L110 ${Q.y}`);
+ const vo=vals[mx]-vals[mn],I=vo/R;
+ document.getElementById('rd').textContent=`${P.top} y ${Q.bot} (${mx} → carga → ${mn})`;
+ document.getElementById('rv').textContent=`v${mx}${mn} = ${vo.toFixed(1)} V`;
+ const cur={};cur[mx]=I;cur[mn]=-I;cur[md]=0;
+ const f=n=>(n>0.0001?'+':n<-0.0001?'−':'')+Math.abs(n).toFixed(2);
+ document.getElementById('ri').textContent=`${f(cur.A)} · ${f(cur.B)} · ${f(cur.C)} A`;
+ document.getElementById('rs').textContent=`${Math.abs(cur.A+cur.B+cur.C).toFixed(2)} A`;
+}
+function step(){dash-=1.5;cp.setAttribute('stroke-dashoffset',dash);}
+window.renderFrame=(d,ds)=>{upd(d);cp.setAttribute('stroke-dashoffset',ds);};
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce)setInterval(step,40);
+ang.addEventListener('input',e=>{stop();upd(+e.target.value);});
+let timer=null;const btn=document.getElementById('play');
+function stop(){if(timer){clearInterval(timer);timer=null;btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Reproducir');}}
+btn.addEventListener('click',()=>{if(timer){stop();return;}btn.innerHTML='&#10074;&#10074;';btn.setAttribute('aria-label','Pausar');timer=setInterval(()=>upd((+ang.value+2)%360),60);});
+upd(60);
+</script>
+</body>
+</html>
