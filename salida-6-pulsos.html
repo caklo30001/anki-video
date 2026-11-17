@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salida de seis pulsos</title>
+<meta name="description" content="Animación interactiva de la salida de un rectificador trifásico de seis pulsos: pico, mínimo y voltaje DC.">
+<style>
+:root{--bg:#ffffff;--text:#1f1e1d;--muted:#6b6a65;--card:#f3f2ee;--border:#d9d7cf;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1c1c1b;--text:#ecebe6;--muted:#a8a69f;--card:#2a2a28;--border:#3d3d3a;}}
+:root[data-theme="dark"]{--bg:#1c1c1b;--text:#ecebe6;--muted:#a8a69f;--card:#2a2a28;--border:#3d3d3a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+main{max-width:860px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:24px;font-weight:600;margin:0 0 6px}
+p.lead{color:var(--muted);margin:0 0 16px;font-size:15px}
+.controls{display:flex;align-items:center;gap:12px;margin:0 0 4px}
+button{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:8px;height:36px;min-width:44px;font-size:16px;cursor:pointer}
+button:hover{background:var(--card)}
+input[type=range]{flex:1;accent-color:#EF9F27}
+svg{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:6px 0 16px}
+.mc{background:var(--card);border-radius:8px;padding:10px 12px}
+.ml{font-size:12px;color:var(--muted);margin:0 0 2px}
+.mv{font-size:16px;font-weight:600;margin:0}
+.notes{font-size:14px;color:var(--muted)}
+.notes li{margin:0 0 4px}
+footer{font-size:12px;color:var(--muted);margin-top:20px}
+svg text{font-family:inherit}
+</style>
+</head>
+<body>
+<main>
+  <h1>Salida de un rectificador trifásico de seis pulsos</h1>
+  <p class="lead">Por qué la salida tiene seis pulsos y de dónde salen el pico, el mínimo y el voltaje DC.</p>
+  <div class="controls">
+    <button id="play" aria-label="Reproducir">&#9654;</button>
+    <label for="ang" style="font-size:14px;color:var(--muted)">Ángulo</label>
+    <input type="range" id="ang" min="0" max="359" step="1" value="90">
+    <span id="angv" style="font-size:14px;font-weight:600;min-width:44px;text-align:right">90°</span>
+  </div>
+  <svg width="100%" viewBox="0 0 680 344" role="img" aria-labelledby="st sd">
+    <title id="st">Salida de seis pulsos</title>
+    <desc id="sd">Seis voltajes de línea como curvas delgadas, la salida del puente como envolvente gruesa, y líneas horizontales para el pico, el voltaje DC y el mínimo.</desc>
+    <defs><clipPath id="clip"><rect x="60" y="40" width="560" height="260"/></clipPath></defs>
+    <g id="grid"></g>
+    <g clip-path="url(#clip)" id="curves"></g>
+    <path id="env" fill="none" stroke="#EF9F27" stroke-width="3.5" clip-path="url(#clip)"/>
+    <line id="hp" x1="60" x2="620" stroke="#D85A30" stroke-width="1" stroke-dasharray="6 4"/>
+    <line id="hd" x1="60" x2="620" stroke="#534AB7" stroke-width="1.5"/>
+    <line id="hm" x1="60" x2="620" stroke="#1D9E75" stroke-width="1" stroke-dasharray="6 4"/>
+    <line id="cur" y1="40" y2="300" stroke="var(--text)" stroke-width="1" stroke-dasharray="3 3"/>
+    <circle id="dot" r="6" fill="#EF9F27"/>
+    <g id="labels"></g>
+    <text x="60" y="314" font-size="12" fill="var(--muted)">0°</text>
+    <text x="620" y="314" font-size="12" fill="var(--muted)" text-anchor="end">360°</text>
+    <g font-size="12">
+      <line x1="70" y1="332" x2="96" y2="332" stroke="#D85A30" stroke-dasharray="6 4"/><text x="102" y="336" fill="var(--muted)">Pico 269.4 V</text>
+      <line x1="220" y1="332" x2="246" y2="332" stroke="#534AB7" stroke-width="1.5"/><text x="252" y="336" fill="var(--muted)">V_DC 257.3 V</text>
+      <line x1="376" y1="332" x2="402" y2="332" stroke="#1D9E75" stroke-dasharray="6 4"/><text x="408" y="336" fill="var(--muted)">Mínimo 233.3 V</text>
+      <line x1="530" y1="332" x2="556" y2="332" stroke="#EF9F27" stroke-width="3.5"/><text x="562" y="336" fill="var(--muted)">Salida</text>
+    </g>
+  </svg>
+  <div class="grid">
+    <div class="mc"><p class="ml">Tramo de 60° actual</p><p class="mv" id="rt">—</p></div>
+    <div class="mc"><p class="ml">Par que conduce</p><p class="mv" id="rp">—</p></div>
+    <div class="mc"><p class="ml">Salida en este instante</p><p class="mv" id="rv">—</p></div>
+    <div class="mc"><p class="ml">Pulsos completados</p><p class="mv" id="rn">—</p></div>
+  </div>
+  <ul class="notes">
+    <li>Entre tres fases hay seis voltajes de línea (curvas delgadas), desfasados 60° entre sí.</li>
+    <li>El puente conecta la carga al mayor de ellos: cada uno manda durante 60°, por eso hay 6 pulsos por ciclo (rizado de 360 Hz).</li>
+    <li>Pico: V<sub>LL,pico</sub> = √2 · 190.5 = 269.4 V. Mínimo: V<sub>LL,pico</sub> · cos 30° = 233.3 V, en el relevo entre pulsos.</li>
+    <li>V<sub>DC</sub> = (3/π) · V<sub>LL,pico</sub> = 257.3 V: el promedio de un pulso de 60°.</li>
+    <li>El eje vertical muestra solo de 180 a 280 V para ampliar el rizado.</li>
+  </ul>
+  <footer>Fuente de 110 V de fase (190.5 V de línea), 60 Hz, diodos ideales. Edward Javier Camargo Gómez · Ingeniería Mecatrónica, Universidad ECCI.</footer>
+</main>
+<script>
+const Vp=155.6,VLL=Vp*Math.sqrt(3),X0=60,X1=620,VTOP=280,VBOT=180,Y0=40,Y1=300;
+const xOf=d=>X0+(X1-X0)*d/360,yOf=v=>Y0+(VTOP-v)*(Y1-Y0)/(VTOP-VBOT);
+const sh={A:0,B:-120,C:-240},pv=(d,k)=>Vp*Math.sin((d+sh[k])*Math.PI/180);
+const pairs=[['A','B','#378ADD'],['A','C','#639922'],['B','C','#D85A30'],['B','A','#378ADD'],['C','A','#639922'],['C','B','#D85A30']];
+let cv='';for(const [p,q,c] of pairs){let s='';for(let d=0;d<=360;d+=2){s+=(d?'L':'M')+xOf(d).toFixed(1)+' '+yOf(pv(d,p)-pv(d,q)).toFixed(1)+' ';}cv+=`<path d="${s}" fill="none" stroke="${c}" stroke-width="1" opacity="0.55"/>`;}
+document.getElementById('curves').innerHTML=cv;
+const out=d=>{const a=['A','B','C'].map(k=>pv(d,k));return Math.max(...a)-Math.min(...a);};
+let e='';for(let d=0;d<=360;d++){e+=(d?'L':'M')+xOf(d).toFixed(1)+' '+yOf(out(d)).toFixed(1)+' ';}document.getElementById('env').setAttribute('d',e);
+const pk=VLL,mn=VLL*Math.cos(Math.PI/6),dc=3/Math.PI*VLL;
+[['hp',pk],['hd',dc],['hm',mn]].forEach(([id,v])=>{const l=document.getElementById(id);l.setAttribute('y1',yOf(v));l.setAttribute('y2',yOf(v));});
+const segStart=d=>(30+60*Math.floor(((d-30)%360+360)%360/60))%360;
+let gr='',lb='';for(let k=0;k<6;k++){const d0=30+60*k;gr+=`<line x1="${xOf(d0)}" x2="${xOf(d0)}" y1="40" y2="300" stroke="var(--border)" stroke-width="0.8"/>`;}
+document.getElementById('grid').innerHTML=gr;
+const name=d=>{const v={};for(const k of ['A','B','C'])v[k]=pv(d,k);const s=Object.keys(v).sort((a,b)=>v[b]-v[a]);return [s[0],s[2]];};
+for(let k=0;k<6;k++){const mid=(60+60*k)%360;const [a,b]=name(mid);lb+=`<text x="${xOf(mid)}" y="34" font-size="12" text-anchor="middle" fill="var(--muted)">v${a}${b}</text>`;}
+document.getElementById('labels').innerHTML=lb;
+const tops={A:'D1',B:'D3',C:'D5'},bots={A:'D4',B:'D6',C:'D2'};const ang=document.getElementById('ang');
+function upd(d){d=Math.round(d)%360;ang.value=d;document.getElementById('angv').textContent=d+'°';
+ const c=document.getElementById('cur');c.setAttribute('x1',xOf(d));c.setAttribute('x2',xOf(d));
+ const o=out(d),dot=document.getElementById('dot');dot.setAttribute('cx',xOf(d));dot.setAttribute('cy',yOf(o));
+ const [a,b]=name(d),s0=segStart(d);
+ document.getElementById('rt').textContent=`${s0}° a ${(s0+60)%360||360}° (v${a}${b})`;
+ document.getElementById('rp').textContent=`${tops[a]} y ${bots[b]}`;
+ document.getElementById('rv').textContent=`${o.toFixed(1)} V`;
+ document.getElementById('rn').textContent=`${Math.floor(((d-30+360)%360)/60)} de 6`;}
+ang.addEventListener('input',e=>{stop();upd(+e.target.value);});
+let t=null;const btn=document.getElementById('play');
+function stop(){if(t){clearInterval(t);t=null;btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Reproducir');}}
+btn.addEventListener('click',()=>{if(t){stop();return;}btn.innerHTML='&#10074;&#10074;';btn.setAttribute('aria-label','Pausar');t=setInterval(()=>upd((+ang.value+1)%360),40);});
+upd(90);
+</script>
+</body>
+</html>
