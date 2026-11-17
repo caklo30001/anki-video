@@ -133,8 +133,16 @@
   function ok() { return player && typeof player.getCurrentTime === "function"; }
   function now() { return ok() ? player.getCurrentTime() : start; }
 
+  // Modo sándwich (&sw=1): la tarjeta pone el español antes y después; el reproductor solo avisa y espera
+  var SW = q.get("sw") === "1";
+  function toCard(m) { try { if (window.parent !== window) window.parent.postMessage(m, "*"); } catch (e) {} }
   function backToStart() {
     clearTimeout(pauseT);
+    if (SW) {
+      player.pauseVideo(); player.seekTo(start, true); player.pauseVideo(); armed = true;
+      toCard({ type: "ld-clip-end", loop: loop, wait: wait });
+      return;
+    }
     if (loop) {
       // Bucle: vuelve al inicio, pausa breve y sigue reproduciendo
       player.pauseVideo(); player.seekTo(start, true);
@@ -163,6 +171,7 @@
     }
   }
   function onReady() {
+    toCard({ type: "ld-ready" });
     if (rate !== 1) player.setPlaybackRate(rate);
     if (Math.abs(start - origStart) > 0.05) player.seekTo(start, true);
   }
@@ -214,7 +223,7 @@
   }
 
   // ---- Controles ----
-  function repeat() { if (!ok()) return; clearTimeout(pauseT); armed = false; player.seekTo(start, true); player.playVideo(); }
+  function repeat() { if (!ok()) return; if (SW) { toCard({ type: "ld-sw-start" }); return; } clearTimeout(pauseT); armed = false; player.seekTo(start, true); player.playVideo(); }
   function jump(d) {
     if (!ok()) return;
     var t = Math.max(0, now() + d);
@@ -223,6 +232,7 @@
   }
   function togglePlay() {
     if (!ok()) return;
+    if (SW && player.getPlayerState() !== YT.PlayerState.PLAYING) { toCard({ type: "ld-sw-start" }); return; }
     if (player.getPlayerState() === YT.PlayerState.PLAYING) player.pauseVideo();
     else { var t = now(); if (end !== null && t >= end) player.seekTo(start, true); armed = false; player.playVideo(); }
   }
@@ -300,6 +310,12 @@
   }
   $("veilBtn").onclick = toggleVeil;
   // La tarjeta de Anki puede mandar su imagen para usarla como tapa del video
+  // Órdenes de la tarjeta en modo sándwich: reproducir el fragmento desde el inicio / pausar
+  window.addEventListener("message", function (e) {
+    var d = e.data; if (!d || !ok()) return;
+    if (d.type === "ld-play") { clearTimeout(pauseT); armed = false; player.seekTo(start, true); player.playVideo(); }
+    else if (d.type === "ld-pause") { clearTimeout(pauseT); player.pauseVideo(); }
+  });
   window.addEventListener("message", function (e) {
     var d = e.data;
     if (d && d.type === "ld-veil-img" && typeof d.src === "string" && /^data:image\//.test(d.src)) {
